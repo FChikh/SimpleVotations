@@ -118,18 +118,19 @@
 					<img class="coollogo" src="logo.png"></img>
 				</div>
 				<div class="right_thing">
-					<form class="forma">
+					<form class="forma" action="/signup/" method="POST">
+                        {% csrf_token %}
 						<div class="form-group">
-							<label for="InputName">Имя</label>
-							{{ form.username }}
+							<label for="InputName">Логин</label>
+							<input type="text" class="form-control vvod" id="InputName" aria-describedby="emailHelp" placeholder="Придумайте логин">
 						</div>
 						<div class="form-group">
 							<label for="InputEmail">Электронная почта</label>
-							{{ form.email }}
+							<input type="email" class="form-control vvod" id="InputEmail" aria-describedby="emailHelp" placeholder="Ваша почта">
 						</div>
 						<div class="form-group">
 							<label for="InputPassword">Пароль</label>
-							{{ form.password }}
+							<input type="password" class="form-control vvod" id="InputPassword" placeholder="Пароль">
 						</div>
 						<button type="submit" class="btn btn-primary voyti">Создать аккаунт</button>
 					</form>

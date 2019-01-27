@@ -10,17 +10,17 @@ from django.core.validators import validate_email
 class RegistrationForm(forms.Form):
     username = forms.CharField(
         label='Логин', max_length=150, min_length=8, required=True,
-        validators=[UnicodeUsernameValidator()],
+
         widget=forms.TextInput(),
     )
     email = forms.EmailField(
         label='Email', required=True,
-        validators=[validate_email],
+
         widget=forms.EmailInput(),
     )
     password = forms.CharField(
         label='Пароль', max_length=30, min_length=8, required=True,
-        validators=[validate_password],
+
         widget=forms.PasswordInput(),
     )
 

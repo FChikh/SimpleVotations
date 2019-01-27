@@ -6,4 +6,4 @@ def login_page(request):
 
 
 def singup_page(request):
-    return render(request, "singin.html", {})
+    return render(request, "signin.html", {})
