@@ -1,7 +1,8 @@
 #oopsie doopsie
 
 class Complex:
-  def __init__(self,question,  votinglist):
+  def __init__(self, id, question, votinglist):
+    self.id = id
     self.question = question
     self.votinglist = votinglist
     """
@@ -14,6 +15,10 @@ class Complex:
 
   def AddOption(self, option):
     if option not in self.votinglist:
-      self.votinglist[option] = 0 # new option was created. it has a 0-counter
+      self.votinglist[option] = 0 # new option is being created. it has a 0-counter
       return True #success return
     return False
+
+  def synchronizeWithDatabase(self):
+    #need to add id/question/votinglist into a database
+    pass
