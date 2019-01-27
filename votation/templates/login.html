@@ -118,14 +118,15 @@
 					<img class="coollogo" src="https://psv4.userapi.com/c848424/u219910198/docs/d1/c4f4f056ce3e/logo.png?extra=-pSdhNW1cgVVQ30lompzcWcSCnFd3yWlnWcQ8hoUzdADC9uyRCmk1-OPwQfiplGbquyk9H9uTnp1H7OI3TX2QzMnOBbI8zUxmS3-QCu1riZDK6XwWuf2FwjH8VGwVhMlb_l2ImGvxOYIMynlYroORYY"></img>
 				</div>
 				<div class="right_thing">
-					<form class="forma">
+					<form class="forma" method="POST">
+                        {% csrf_token %}
 						<div class="form-group">
 							<label for="InputLogin">Логин</label>
-							<input type="text" class="form-control vvod" id="InputLogin" placeholder="Ваш логин">
+							<input type="text" name="username" class="form-control vvod" id="InputLogin" placeholder="Ваш логин">
 						</div>
 						<div class="form-group">
 							<label for="InputPassword">Пароль</label>
-							<input type="password" class="form-control vvod" id="InputPassword" placeholder="Пароль">
+							<input type="password" name="password" class="form-control vvod" id="InputPassword" placeholder="Пароль">
 						</div>
 						<button type="submit" class="btn btn-primary voyti">Войти</button>
 					</form>
