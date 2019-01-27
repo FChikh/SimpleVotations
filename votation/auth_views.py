@@ -3,7 +3,7 @@ from urllib.parse import urlparse
 from django.contrib.sites.shortcuts import get_current_site
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
-from django.contrib.auth import login
+from django.contrib.auth import login, authenticate
 
 from votation.forms import RegistrationForm
 
@@ -16,7 +16,25 @@ def check_redirection_url_safety(request, url):
     return False
 
 
-def registration_page(request):
+def login_user(request):
+    context = dict()
+    next_page = request.GET.get('next', '/')
+    if not check_redirection_url_safety(request, next_page):
+        next_page = '/'
+    username = password = ''
+    if request.POST:
+        username = request.POST['username']
+        password = request.POST['password']
+
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+                return redirect(next_page)
+    return render(request, 'login.html', context)
+
+
+def signup_page(request):
     next_page = request.GET.get('next', '/')
     if not check_redirection_url_safety(request, next_page):
         next_page = '/'
