@@ -12,7 +12,6 @@ def check_redirection_url_safety(request, url):
     parsed = urlparse(url)
     current_site = get_current_site(request)
     if not parsed.netloc or parsed.netloc == current_site.domain:
-        print('lol')
         return True
     return False
 

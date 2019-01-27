@@ -17,4 +17,3 @@ class Complex:
       self.votinglist[option] = 0 # new option was created. it has a 0-counter
       return True #success return
     return False
-  
