@@ -16,6 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from votation import auth_views
+from django.contrib.auth.views import LoginView
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('register', auth_views.registration_page),
+    path('login', LoginView.as_view())
 ]
