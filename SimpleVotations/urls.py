@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 
-
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from votation import auth_views, views, votingEngine
 
 urlpatterns = [
@@ -9,5 +9,6 @@ urlpatterns = [
     path("login/", auth_views.login_page),
     path("signup/", auth_views.signup_page),
     path("", views.main)
-
 ]
+
+urlpatterns += staticfiles_urlpatterns()

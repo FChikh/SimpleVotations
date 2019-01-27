@@ -18,7 +18,8 @@
 		left: 0;
 		height: 100%;
 		width: 100%;
-		background: url("https://psv4.userapi.com/c848424/u219910198/docs/d13/24cf4c52b1ea/bg.png?extra=ZcFc-RWEwE9G-2nEspm2U95inTQeXaEfl_-J5MJFqXtDhCqjrkll17O6yUo_JhLlZjV8IY5PCMniZePWc3GwKUpZ1x5Muu38c3adhRnp2j7Uodkz7ZrWr_FN32vCPem5FyFcldVU2h39p7tZ57Nlmfg");
+		{% load staticfiles %}
+		background: url("{% static 'votation/bg.png' %}");
 	}
 	.middle {
 		display: table-cell;
@@ -115,7 +116,8 @@
 					<div class="cooltext">
 						Vot!ng.org
 					</div>
-					<img class="coollogo" src="https://psv4.userapi.com/c848424/u219910198/docs/d1/c4f4f056ce3e/logo.png?extra=-pSdhNW1cgVVQ30lompzcWcSCnFd3yWlnWcQ8hoUzdADC9uyRCmk1-OPwQfiplGbquyk9H9uTnp1H7OI3TX2QzMnOBbI8zUxmS3-QCu1riZDK6XwWuf2FwjH8VGwVhMlb_l2ImGvxOYIMynlYroORYY"></img>
+					{% load static %}
+					<img class="coollogo" src="{% static 'votation/logo.png' %}"></img>
 				</div>
 				<div class="right_thing">
 					<form class="forma" method="POST">
@@ -131,7 +133,7 @@
 						<button type="submit" class="btn btn-primary voyti">Войти</button>
 					</form>
 					<div class="singin">
-						Нет аккаунта? <a href="../singup" style="color:white;"><u>Cоздайте</u>!</a>
+						Нет аккаунта? <a href="../signup" style="color:white;"><u>Cоздайте</u>!</a>
 					</div>
 				</div>
 			</div>
