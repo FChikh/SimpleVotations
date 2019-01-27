@@ -1,9 +1,9 @@
 from urllib.parse import urlparse
 
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.models import User
 from django.contrib.sites.shortcuts import get_current_site
 from django.shortcuts import render, redirect
-from django.contrib.auth.models import User
-from django.contrib.auth import login, authenticate
 
 from votation.forms import RegistrationForm
 
@@ -12,6 +12,7 @@ def check_redirection_url_safety(request, url):
     parsed = urlparse(url)
     current_site = get_current_site(request)
     if not parsed.netloc or parsed.netloc == current_site.domain:
+        print('lol')
         return True
     return False
 
@@ -35,7 +36,7 @@ def login_page(request):
 
 
 def signup_page(request):
-    next_page = request.GET.get('next', '/')
+    next_page = request.GET.get('next', '/login')
     if not check_redirection_url_safety(request, next_page):
         next_page = '/login'
     if request.user.is_authenticated:
@@ -47,8 +48,6 @@ def signup_page(request):
         context['form'] = RegistrationForm()
     elif request.method == "POST":
         form = RegistrationForm(request.POST)
-        print(form)
-        print('lol')
         if form.is_valid():
             user = User.objects.create_user(
                 username=form.data.get('username'),
@@ -56,7 +55,6 @@ def signup_page(request):
                 password=form.data.get('password'),
             )
             user.save()
-            print('kek')
             login(request, user)
             return redirect(next_page)
         else:
