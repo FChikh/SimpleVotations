@@ -8,7 +8,8 @@ urlpatterns = [
     path("login/", auth_views.login_page),
     path("signup/", auth_views.signup_page),
     path("", views.main),
-    path("dbadd",votingEngine.extractfromdb)
+    path("dbadd",votingEngine.extractfromdb),
+    path("profile/", views.profile),
 ]
 
 urlpatterns += staticfiles_urlpatterns()
