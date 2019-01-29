@@ -24,4 +24,10 @@ class RegistrationForm(forms.Form):
         widget=forms.PasswordInput(),
     )
 
-
+    def clean_username(self):
+        username = self.cleaned_data.get('username')
+        if User.objects.filter(username__iexact=username).exists():
+            raise ValidationError(
+                'Пользователь с таким именем уже есть.',
+                code='invalid',
+            )
