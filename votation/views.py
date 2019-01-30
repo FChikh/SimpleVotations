@@ -6,4 +6,8 @@ def main(request):
 
 
 def profile(request):
-    return render(request, "profile.html")
+    data = {}
+    data['name'] = "Игорь"
+    data['surname'] = "Нуруллаев"
+    data['pic'] = "static/votation/anon.png"
+    return render(request, "profile.html", data)
