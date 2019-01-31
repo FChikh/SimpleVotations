@@ -1,115 +1,129 @@
 <!doctype html>
 <html lang="en">
 <head>
-<<<<<<< HEAD
-	<!-- Required meta tags -->
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <<<<<<< HEAD
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
-	<link href="https://fonts.googleapis.com/css?family=Didact+Gothic" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Didact+Gothic" rel="stylesheet">
 
-	{% load staticfiles %}
-	<link rel="shortcut icon" type="image/png" href="{% static 'votation/favicon.ico' %}"/>
+    {% load staticfiles %}
+    <link rel="shortcut icon" type="image/png" href="{% static 'votation/favicon.ico' %}"/>
 
-	<style type="text/css">
-	.outer {
-		display: table;
-		position: absolute;
-		top: 0;
-		left: 0;
-		height: 100%;
-		width: 100%;
-		{% load staticfiles %}
-		background: url("{% static 'votation/bg.png' %}");
-	}
-	.middle {
-		display: table-cell;
-		vertical-align: middle;
-	}
-	.inner {
-		margin-left: auto;
-		margin-right: auto;
-	}
-	.content {
-		width: 600px;
-		height: 350px;
-		background-color: #ffa8af;
-		border-radius: 10px;
-		display: flex;
-		flex-direction: row;
-	}
-	.left_thing {
-		font-family: 'Didact Gothic', sans-serif;
-		text-align: center;
-		background-color: white;
-		height: 100%;
-		width: 40%;
-		border-radius: 10px;
-	}
-	.cooltext {
-		padding-top: 50px;
-		font-size: 2em;
-		background: -webkit-linear-gradient(#fbceb1, #ef98aa);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-	}
-	.right_thing {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		align-content: center;
-	}
-	.forma {
-		margin-left: 60px;
-		color: white;
-	}
-	.voyti {
-		margin-top: 10px;
-		background-color: white;
-		color: #ffa8af;
-		border-color: #ffa8af;
-	}
-	.voyti:focus { 
-		outline: none;
-		border-color: #f19cbb;
-		box-shadow: 0 0 10px #f19cbb;
-	}
-	.coollogo {
-		margin-top: 100px;
-		width: 100px;
-		height: auto;
-	}
-	.voyti:hover {
-		margin-top: 10px;
-		background-color: #ffa8af;
-		color: white;
-		border-color: white;
-	}
-	.voyti:active {
-		background-color: #f19cbb;
-		color: white;
-		border-color: white;
-	}
-	.vvod:focus {
-		outline:none;
-		border: 1px solid #f19cbb; 
-		/* create a BIG glow */
-		box-shadow: 0px 0px 14px #f19cbb; 
-		-moz-box-shadow: 0px 0px 14px #f19cbb;
-		-webkit-box-shadow: 0px 0px 14px #f19cbb;  
-	}
-	.singin {
-		color: white;
-		margin-top: 15px;
-		padding-left: 80px;
-	}
-</style>
+    <style type="text/css">
+        .outer {
+            display: table;
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+        {% load staticfiles %} background: url("{% static 'votation/bg.png' %}");
+        }
 
-<title>Регистрация</title>
+        .middle {
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+        .inner {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .content {
+            width: 600px;
+            height: 350px;
+            background-color: #ffa8af;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: row;
+        }
+
+        .left_thing {
+            font-family: 'Didact Gothic', sans-serif;
+            text-align: center;
+            background-color: white;
+            height: 100%;
+            width: 40%;
+            border-radius: 10px;
+        }
+
+        .cooltext {
+            padding-top: 50px;
+            font-size: 2em;
+            background: -webkit-linear-gradient(#fbceb1, #ef98aa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .right_thing {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+        }
+
+        .forma {
+            margin-left: 60px;
+            color: white;
+        }
+
+        .voyti {
+            margin-top: 10px;
+            background-color: white;
+            color: #ffa8af;
+            border-color: #ffa8af;
+        }
+
+        .voyti:focus {
+            outline: none;
+            border-color: #f19cbb;
+            box-shadow: 0 0 10px #f19cbb;
+        }
+
+        .coollogo {
+            margin-top: 100px;
+            width: 100px;
+            height: auto;
+        }
+
+        .voyti:hover {
+            margin-top: 10px;
+            background-color: #ffa8af;
+            color: white;
+            border-color: white;
+        }
+
+        .voyti:active {
+            background-color: #f19cbb;
+            color: white;
+            border-color: white;
+        }
+
+        .vvod:focus {
+            outline: none;
+            border: 1px solid #f19cbb;
+            /* create a BIG glow */
+            box-shadow: 0px 0px 14px #f19cbb;
+            -moz-box-shadow: 0px 0px 14px #f19cbb;
+            -webkit-box-shadow: 0px 0px 14px #f19cbb;
+        }
+
+        .singin {
+            color: white;
+            margin-top: 15px;
+            padding-left: 80px;
+        }
+    </style>
+
+    <title>Регистрация</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -242,13 +256,13 @@
                 {% load static %}
                 <img class="coollogo" src="{% static 'votation/logo.png' %}"></img></div>
             <div class="right_thing">
+                {% for message in messages %}
+                    <div class="alert alert-light" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
                 <form class="forma" method="POST">
                     {% csrf_token %}
-                    {% for message in messages %}
-                        <div class="message {{ message.tags }}">
-                            {{ message }}
-                        </div>
-                    {% endfor %}
                     <div class="form-group">
                         <label for="InputName">Логин</label>
                         <input type="text" name="username" class="form-control vvod" id="InputName"
