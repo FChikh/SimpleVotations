@@ -4,8 +4,10 @@ from django.contrib.auth.models import User
 from django.contrib.sites.shortcuts import get_current_site
 from django.shortcuts import render, redirect
 from django.core.exceptions import ObjectDoesNotExist
+from django.contrib import messages
+from django.db import IntegrityError
 
-from votation.forms import RegistrationForm
+from votation.forms import RegistrationForm, LoginForm
 
 
 def check_redirection_url_safety(request, url):
@@ -34,6 +36,16 @@ def login_page(request):
             if user.is_active:
                 login(request, user)
                 return redirect(next_page)
+            else:
+                form = LoginForm()
+                messages.error(request, 'Пользователь неактивен')
+                context['form'] = form
+                return render(request, 'login.html', context)
+        else:
+            form = LoginForm()
+            messages.error(request, 'Неверные логин или пароль')
+            context['form'] = form
+            return render(request, 'login.html', context)
     return render(request, 'login.html', context)
 
 
@@ -51,14 +63,19 @@ def signup_page(request):
     elif request.method == "POST":
         form = RegistrationForm(request.POST)
         if form.is_valid():
-            user = User.objects.create_user(
-                username=form.data.get('username'),
-                email=form.data.get('email'),
-                password=form.data.get('password'),
-            )
-            user.save()
-            login(request, user)
-            return redirect(next_page)
+            try:
+                user = User.objects.create_user(
+                    username=form.data.get('username'),
+                    email=form.data.get('email'),
+                    password=form.data.get('password'),
+                )
+            except IntegrityError:
+                messages.error(request, 'Пользователь с таким логином уже существует')
+                return render(request, 'signin.html', context)
+            else:
+                user.save()
+                login(request, user)
+                return redirect(next_page)
         else:
             context['form'] = form
 
