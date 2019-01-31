@@ -2,7 +2,7 @@
 from votation import models
 from datetime import datetime
 from django.shortcuts import render
-
+import random
 class Complex:
   def __init__(self, authorsid, question, options,
                           option1=None ,option1counter=None,
@@ -61,19 +61,40 @@ def extractfromdb(request, idtoextract): #extraction from db
   return render(request, 'login.html')
 
 
+
+
+def calculate_the_percentage(d):
+  counter=0
+  ss=0
+  result=[]
+  for num in d:
+    counter += 1
+    ss += int(num)
+
+  for num in d:
+    tmp= (num/ss)*100
+    tmp = int(tmp)
+    result.append(tmp)
+
+  for num in result:
+    if sum(result)<100:
+      result[0]+=1
+
+  return result
+
 def friendly_extract_for_profile(authorid):
   dataextr = {}
   dataextr["votes_history"] = []
 
-
-  data = models.VotingsBase.objects.filter(authorid=authorid).values_list()
-  for object in data:
+  dat = models.VotingsBase.objects.filter(authorid=authorid).values_list()
+  for object in dat:
     print(object)
     if object[3] == 4:
-      query=[{'title': object[4], 'percentage':object[3]},
-             {'title': object[6], 'percentage': object[5]},
-             {'title': object[8], 'percentage': object[7]},
-             {'title': object[10], 'percentage': object[9]}]
+      perc=(calculate_the_percentage([object[3], object[5], object[7], object[9]]))
+      query=[{'title': object[4], 'percentage':perc[0]},
+             {'title': object[6], 'percentage': perc[1]},
+             {'title': object[8], 'percentage': perc[2]},
+             {'title': object[10], 'percentage': perc[3]}]
     if object[3] == 3:
       query=[{'title': object[4], 'percentage':object[3]},
              {'title': object[6], 'percentage': object[5]},
@@ -82,7 +103,7 @@ def friendly_extract_for_profile(authorid):
       query=[{'title': object[4], 'percentage':object[3]},
              {'title': object[6], 'percentage': object[5]}]
 
-      
+
     dataextr['votes_history'] = [query]
 
   return dataextr
