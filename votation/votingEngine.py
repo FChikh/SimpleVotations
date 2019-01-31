@@ -69,9 +69,21 @@ def friendly_extract_for_profile(authorid):
   data = models.VotingsBase.objects.filter(authorid=authorid).values_list()
   for object in data:
     print(object)
-    if object[3]==4:
-      query=[{'title': object[4], 'percentage':object[3]}, {'title': object[6], 'percentage': object[5]}, {'title': object[8], 'percentage': object[7]},{'title': object[10], 'percentage': object[9]}]
-    dataextr['votes_history']=[query]
+    if object[3] == 4:
+      query=[{'title': object[4], 'percentage':object[3]},
+             {'title': object[6], 'percentage': object[5]},
+             {'title': object[8], 'percentage': object[7]},
+             {'title': object[10], 'percentage': object[9]}]
+    if object[3] == 3:
+      query=[{'title': object[4], 'percentage':object[3]},
+             {'title': object[6], 'percentage': object[5]},
+             {'title': object[8], 'percentage': object[7]}]
+    if object[3] == 2:
+      query=[{'title': object[4], 'percentage':object[3]},
+             {'title': object[6], 'percentage': object[5]}]
+
+      
+    dataextr['votes_history'] = [query]
 
   return dataextr
 
