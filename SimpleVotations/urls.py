@@ -10,7 +10,8 @@ urlpatterns = [
     path("signup/", auth_views.signup_page),
     path("", views.main),
     path("profile/", views.profile),
-    path("complaints/", views.complain)
+    path("complaints/", views.complain),
+    path("dbadd", votingEngine.extractfromdb)
 ]
 
 urlpatterns += staticfiles_urlpatterns()
