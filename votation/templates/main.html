@@ -74,6 +74,30 @@
 		order: 2;
 		background-color: white;
 	}
+	.votes_list {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: flex-start;
+		align-items: flex-start;
+	}
+	.vote {
+		color: white;
+		width: auto;
+		height: 100px;
+		margin: 20px;
+		padding: 10px;
+		border-radius: 13px;
+		background-color: #FDC2BE;
+		display: flex;
+		flex-direction: column;
+	}
+	.vote_item {
+		align-items: center;
+		display: flex;
+		margin: 10px;
+		flex-direction: row;
+	}
 </style>
 
 <title>Главная</title>
@@ -88,16 +112,23 @@
 				<div class="menu_element">Жабы</div>
 			</div>
 			<div class="cont">
-				
+				<div class="votes_list">
+					{% for item in votes %}
+						<div class="vote">		
+								<div class="vote_item">Добавить</div>
+								{% for i in item %}
+
+								<div class="vote_item">
+									{{i.title}} {{i.percentage}}%
+								</div>
+
+							{% endfor %}	
+						</div>
+					{% endfor %}
+				</div>
 			</div>
 		</div>
 	</div>
-
-	<script>
-		data() {
-			return {};
-		}
-	</script>
 
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>

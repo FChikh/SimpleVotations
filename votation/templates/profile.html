@@ -78,6 +78,15 @@
 		height: 100%;
 		width: 50%;
 	}
+	.profile_image {
+		width: 150px;
+		height: 150px;
+		margin: 70px;
+	}
+	.history {
+
+	}
+	.
 </style>
 
 <title>Профиль</title>
@@ -94,9 +103,15 @@
 			<div class="cont">
 				<div class="profil">
 					<div class="profile_image">
-						<img src={{pic}}></img>
+						{% load staticfiles %}
+						<img width="150px" height="150px" src="{% static 'votation/anon.png' %}"></img>
 					</div>
 					<div>{{name}} {{surname}}</div>
+				</div>
+				<div class="history">
+					<div class="history_name">
+						История голосований
+					</div>
 				</div>
 			</div>
 		</div>
