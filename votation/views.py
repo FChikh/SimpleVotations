@@ -1,6 +1,6 @@
 from django.shortcuts import render
-
-
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 def main(request):
     data = {}
     data["votes"] = [
@@ -28,11 +28,13 @@ def complain(request):
     data = {}
     return render(request, "complaints.html", data)
 
-
+@login_required
 def profile(request):
     data = {}
-    data['name'] = "Игорь"
-    data['surname'] = "Нуруллаев"
+    username = None
+    username = request.user.username
+    data['name'] = username
+    data['surname'] = request.user.email
     data["votes_history"] = [
         [
             {
