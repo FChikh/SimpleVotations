@@ -37,7 +37,6 @@
 		-webkit-text-fill-color: transparent;
 	}
 	.navigation {
-		position: absolute;
 		height: 100%;
 		width: 200px;
 		background-color: #ffa8af;
@@ -70,23 +69,50 @@
 	.cont {
 		height: 100%;
 		width: 100%;
+		margin: 20px;
+		border-radius: 20px;
+		order: 2;
 		background-color: white;
 	}
+	.profil {
+		height: 100%;
+		width: 50%;
+	}
+	.profile_image {
+		width: 150px;
+		height: 150px;
+		margin: 70px;
+	}
+	.history {
+
+	}
+	.
 </style>
 
 <title>Профиль</title>
 </head>
-<body>
+<body scroll="no" style="overflow: hidden">
 	<div class="body">
 		<div class="content">
 			<div class="navigation">
-				<div class="menu_logo"><div class="cooltext">Vot!ng.org</div></div>
+				<a style="text-decoration:none" href=".."><div class="menu_logo"><div class="cooltext">Vot!ng.org</div></div></a>
 				<a style="text-decoration:none" href=""><div class="menu_element">Профиль</div></a>
 				<a style="text-decoration:none" href=""><div class="menu_element">Жалобы</div></a>
 				<div class="menu_element">Жабы</div>
 			</div>
 			<div class="cont">
-				rtr
+				<div class="profil">
+					<div class="profile_image">
+						{% load staticfiles %}
+						<img width="150px" height="150px" src="{% static 'votation/anon.png' %}"></img>
+					</div>
+					<div>{{name}} {{surname}}</div>
+				</div>
+				<div class="history">
+					<div class="history_name">
+						История голосований
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
