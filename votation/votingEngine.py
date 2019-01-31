@@ -61,6 +61,21 @@ def extractfromdb(request, idtoextract): #extraction from db
   return render(request, 'login.html')
 
 
+def friendly_extract_for_profile(authorid):
+  dataextr = {}
+  dataextr["votes_history"] = []
+
+
+  data = models.VotingsBase.objects.filter(authorid=authorid).values_list()
+  for object in data:
+    print(object)
+    if object[3]==4:
+      query=[{'title': object[4], 'percentage':object[3]}, {'title': object[6], 'percentage': object[5]}, {'title': object[8], 'percentage': object[7]},{'title': object[10], 'percentage': object[9]}]
+    dataextr['votes_history']=[query]
+
+  return dataextr
+
+
 def testing(request):  # test to add values to db
   ne = models.VotingsBase(authorid=1, question="Are u ready?",options=4,
                           option1="yes",option1counter=10,
