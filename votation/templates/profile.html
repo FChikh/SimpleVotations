@@ -73,6 +73,8 @@
 		border-radius: 20px;
 		order: 2;
 		background-color: white;
+		display: flex;
+		flex-direction: row;
 	}
 	.profil {
 		height: 100%;
@@ -86,7 +88,42 @@
 	.history {
 
 	}
-	.
+	.history_name {
+		padding: 10px;
+		margin: 20px;
+		border-radius: 13px 0 0 13px;
+		background-color: #FDC2BE;
+		width: 100%;
+		height: auto;
+		color: white;
+	}
+ 	.votes_list {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: flex-start;
+		align-items: flex-start;
+	}
+	.vote {
+		color: white;
+		width: auto;
+		height: auto;
+		margin: 20px;
+		padding: 10px;
+		border-radius: 13px;
+		background-color: #FDC2BE;
+		display: flex;
+		flex-direction: column;
+	}
+	.vote:hover {
+		cursor: pointer;
+	}
+	.vote_item {
+		align-items: center;
+		display: flex;
+		margin: 5px;
+		flex-direction: row;
+	}
 </style>
 
 <title>Профиль</title>
@@ -97,7 +134,7 @@
 			<div class="navigation">
 				<a style="text-decoration:none" href=".."><div class="menu_logo"><div class="cooltext">Vot!ng.org</div></div></a>
 				<a style="text-decoration:none" href=""><div class="menu_element">Профиль</div></a>
-				<a style="text-decoration:none" href=""><div class="menu_element">Жалобы</div></a>
+				<a style="text-decoration:none" href="complaints"><div class="menu_element">Жалобы</div></a>
 				<div class="menu_element">Жабы</div>
 			</div>
 			<div class="cont">
@@ -111,6 +148,19 @@
 				<div class="history">
 					<div class="history_name">
 						История голосований
+					</div>
+					<div class="votes_list">
+						{% for item in votes_history %}
+						<div class="vote">		
+							{% for i in item %}
+
+							<div class="vote_item">
+								{{i.title}} {{i.percentage}}%
+							</div>
+
+							{% endfor %}	
+						</div>
+						{% endfor %}
 					</div>
 				</div>
 			</div>

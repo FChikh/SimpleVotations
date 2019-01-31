@@ -9,7 +9,8 @@ urlpatterns = [
     path("login/", auth_views.login_page),
     path("signup/", auth_views.signup_page),
     path("", views.main),
-    path("profile/", views.profile)
+    path("profile/", views.profile),
+    path("complaints/", views.complain)
 ]
 
 urlpatterns += staticfiles_urlpatterns()

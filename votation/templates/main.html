@@ -84,7 +84,7 @@
 	.vote {
 		color: white;
 		width: auto;
-		height: 100px;
+		height: auto;
 		margin: 20px;
 		padding: 10px;
 		border-radius: 13px;
@@ -92,11 +92,19 @@
 		display: flex;
 		flex-direction: column;
 	}
+	.vote:hover {
+		cursor: pointer;
+	}
 	.vote_item {
 		align-items: center;
 		display: flex;
-		margin: 10px;
+		margin: 5px;
 		flex-direction: row;
+	}
+	.add {
+		height: 100%;
+		text-align: center;
+		font-size: 1.3em;
 	}
 </style>
 
@@ -108,14 +116,14 @@
 			<div class="navigation">
 				<div class="menu_logo"><div class="cooltext">Vot!ng.org</div></div>
 				<a style="text-decoration:none" href="profile"><div class="menu_element">Профиль</div></a>
-				<a style="text-decoration:none" href=""><div class="menu_element">Жалобы</div></a>
+				<a style="text-decoration:none" href="complaints"><div class="menu_element">Жалобы</div></a>
 				<div class="menu_element">Жабы</div>
 			</div>
 			<div class="cont">
 				<div class="votes_list">
+					<div class="vote add">Добавить</div>
 					{% for item in votes %}
 						<div class="vote">		
-								<div class="vote_item">Добавить</div>
 								{% for i in item %}
 
 								<div class="vote_item">

@@ -24,6 +24,11 @@ def main(request):
     return render(request, "main.html", data)
 
 
+def complain(request):
+    data = {}
+    return render(request, "complaints.html", data)
+
+
 def profile(request):
     data = {}
     data['name'] = "Игорь"
