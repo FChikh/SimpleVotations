@@ -9,6 +9,7 @@ from votation import votingEngine
 from votation.forms import ProfileEditForm
 
 
+
 def main(request):
     data = dict()
     data["votes"] = [
@@ -44,7 +45,6 @@ def profile(request):
     data['name'] = request.user.username
     data['surname'] = request.user.email
     print(data)
-
     if request.method == "POST":
         form = ProfileEditForm(request.POST)
         if form.is_valid():
@@ -73,4 +73,5 @@ def profile(request):
                 return render(request, 'profile.html', data)
         else:
             return render(request, 'profile.html', data)
+
     return render(request, "profile.html", data)

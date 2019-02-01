@@ -8,8 +8,11 @@
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
 	{% load staticfiles %}
 	<link rel="shortcut icon" type="image/png" href="{% static 'votation/favicon.ico' %}"/>
+
+
 	<style type="text/css">
 	.body {
 		display: table;
@@ -76,66 +79,21 @@
 		order: 2;
 		background-color: white;
 	}
-	.votes_list {
-		display: flex;
-		flex-direction: row;
-		flex-wrap: wrap;
-		justify-content: flex-start;
-		align-items: flex-start;
-	}
-	.vote {
-		color: white;
-		width: auto;
-		height: auto;
-		margin: 20px;
-		padding: 10px;
-		border-radius: 13px;
-		background-color: #FDC2BE;
-		display: flex;
-		flex-direction: column;
-	}
-	.vote:hover {
-		cursor: pointer;
-	}
-	.vote_item {
-		align-items: center;
-		display: flex;
-		margin: 5px;
-		flex-direction: row;
-	}
-	.add {
-		height: 100%;
-		text-align: center;
-		font-size: 1.3em;
-	}
 </style>
 
-<title>Главная</title>
+<title>Жалобы</title>
 </head>
 <body scroll="no" style="overflow: hidden">
 	<div class="body">
 		<div class="content">
 			<div class="navigation">
-				<div class="menu_logo"><div class="cooltext">Vot!ng.org</div></div>
-				<a style="text-decoration:none" href="profile"><div class="menu_element">Профиль</div></a>
-				<a style="text-decoration:none" href="../complaints"><div class="menu_element">Жалобы</div></a>
+				<a style="text-decoration:none" href=".."><div class="menu_logo"><div class="cooltext">Vot!ng.org</div></div></a>
+				<a style="text-decoration:none" href="../profile"><div class="menu_element">Профиль</div></a>
+				<a style="text-decoration:none" href=""><div class="menu_element">Жалобы</div></a>
 				<div class="menu_element">Жабы</div>
 			</div>
 			<div class="cont">
-				<div class="votes_list">
-					<div class="vote add">Добавить</div>
-					{% for item in votes %}
-						<div class="vote">		
-								{% for i in item %}
-
-								<div class="vote_item">
-									{{i.title}} {{i.percentage}}%
-								</div>
-
-							{% endfor %}	
-						</div>
-					{% endfor %}
-				</div>
+				
 			</div>
 		</div>
 	</div>
