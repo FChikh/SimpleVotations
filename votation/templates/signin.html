@@ -117,6 +117,30 @@
             margin-top: 15px;
             padding-left: 80px;
         }
+
+        <
+        <
+        <
+        <
+        <
+        <
+        <
+        Updated upstream
+
+        =
+        =
+        =
+        =
+        =
+        =
+        =
+
+        .alert {
+            position: absolute;
+            width: 100%;
+        }
+
+        >>> >>> > Stashed changes
     </style>
 
     <title>Регистрация</title>
@@ -135,25 +159,22 @@
             <div class="right_thing">
                 <form class="forma" method="POST">
                     {% csrf_token %}
-                    {% for message in messages %}
-                        <div class="message {{ message.tags }}">
-                            {{ message }}
-                        </div>
-                    {% endfor %}
                     <div class="form-group">
                         <label for="InputName">Логин</label>
-                        <input type="text" name="username" class="form-control vvod" id="InputName"
-                               aria-describedby="emailHelp" placeholder="Придумайте логин">
+                        <input required type="text" minlength="4" maxlength="150" name="username"
+                               class="form-control vvod"
+                               id="InputName" aria-describedby="emailHelp" placeholder="Придумайте логин">
                     </div>
                     <div class="form-group">
                         <label for="InputEmail">Электронная почта</label>
-                        <input type="email" name="email" class="form-control vvod" id="InputEmail"
+                        <input required type="email" name="email" class="form-control vvod" id="InputEmail"
                                aria-describedby="emailHelp" placeholder="Ваша почта">
                     </div>
                     <div class="form-group">
                         <label for="InputPassword">Пароль</label>
-                        <input type="password" name="password" class="form-control vvod" id="InputPassword"
-                               placeholder="Пароль">
+                        <input required type="password" minlength="8" maxlength="50" name="password"
+                               class="form-control vvod"
+                               id="InputPassword" placeholder="Пароль">
                     </div>
                     <button type="submit" class="btn btn-primary voyti">Создать аккаунт</button>
                 </form>
@@ -161,6 +182,12 @@
         </div>
     </div>
 </div>
+
+{% for message in messages %}
+    <div class="alert alert-light" role="alert">
+        {{ message }}
+    </div>
+{% endfor %}
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
