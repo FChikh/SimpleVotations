@@ -1,18 +1,16 @@
 from django.contrib import messages
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.shortcuts import render
-<<<<<<< Updated upstream
-=======
-from django.contrib.auth.models import User
-from django.contrib.auth.decorators import login_required
+
 from votation import votingEngine
 from votation.forms import ProfileEditForm
->>>>>>> Stashed changes
 
 
 def main(request):
-    data = {}
+    data = dict()
     data["votes"] = [
         [
             {
@@ -33,6 +31,7 @@ def main(request):
     data["votes"] *= 10
     return render(request, "main.html", data)
 
+
 def complain(request):
     data = {}
     return render(request, "complaints.html", data)
@@ -51,21 +50,23 @@ def profile(request):
         if form.is_valid():
             try:
                 user_old = User.objects.get(username=data['name'])
-                new_username = form.data.get('username') if not None else user_old.username
-                new_email = form.data.get('email') if None else user_old.email
+                new_username = form.data.get('username')
+                new_email = form.data.get('email')
+                if new_username is None:
+                    new_username = user_old.username
+                if new_email is None:
+                    new_email = user_old.email
                 print(new_username, new_email)
-                if form.data.get('password') is None:
-                    user = User.objects.filter(username=data['name']).update(
-                        username=new_username,
-                        email=new_email,
-                    )
-                else:
-                    user = User.objects.filter(username=data['name']).update(
-                        username=new_username,
-                        email=new_email,
-                        password=form.data.get('password'),
-                    )
-                    login(new_username, form.data.get('password'))
+                u = User.objects.get(username=data['name'])
+                u.email = new_email
+                u.username = new_username
+                if form.data.get('password') is not None:
+                    u.set_password(form.data.get('password'))
+                u.save()
+                logout(request)
+                login(request, u)
+                data['name'] = new_username
+                data['surname'] = new_email
 
             except IntegrityError:
                 messages.error(request, 'Пользователь с таким логином уже существует')

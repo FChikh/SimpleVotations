@@ -1,66 +1,121 @@
-#oopsie doopsie
-from votation import models
+# oopsie doopsie
 from datetime import datetime
+
 from django.shortcuts import render
 
+from votation import models
+
+
 class Complex:
-  def __init__(self, author, question, votinglist):
-    self.author = author
-    self.question = question
-    self.votinglist = votinglist
-    """
-    example of votingList
-    voting1 = {
-      '1. yes': 10, # option
-      '2. no': 23, # option
-    }
-    """
+    def __init__(self, authorsid, question, options,
+                 option1=None, option1counter=None,
+                 option2=None, option2counter=None,
+                 option3=None, option3counter=None,
+                 option4=None, option4counter=None, date=None):
+        self.authorsid = authorsid
+        self.question = question
+        self.options = options
 
-  def addoption(self, option):
-    if option not in self.votinglist:
-      self.votinglist[option] = 0 # new option is being created. it has a 0-counter
-      return True #success return
-    return False
+        self.option1 = option1 if option1 is not None else ""
+        self.option1counter = option1counter if option1counter is not None else 0
+
+        self.option2 = option2 if option2 is not None else ""
+        self.option2counter = option2counter if option2counter is not None else 0
+
+        self.option3 = option3 if option3 is not None else ""
+        self.option3counter = option3counter if option3counter is not None else 0
+
+        self.option4 = option4 if option4 is not None else ""
+        self.option4counter = option4counter if option4counter is not None else 0
+
+        self.date = datetime.date(date) if date is not None else datetime.now()  # datetime.date(2018, 13, 14)
+
+    def addoption(self, optionid, optionstring, optioncounter):  # func to change or add question and its counter
+        if optionid == 1:
+            self.option1 = optionstring
+            self.option1counter = int(optioncounter)
+        elif optionid == 2:
+            self.option2 = optionstring
+            self.option2counter = int(optioncounter)
+        elif optionid == 3:
+            self.option3 = optionstring
+            self.option3counter = int(optioncounter)
+        elif optionid == 4:
+            self.option4 = optionstring
+            self.option4counter = int(optioncounter)
+        return self
+
+    def synchronizewithdatabase(self):  # func to add object to db
+
+        p = models.VotingsBase(self.author,
+                               self.question, self.options,
+                               self.option1, int(self.option1counter),
+                               self.option2, int(self.option2counter),
+                               self.option3, int(self.option3counter),
+                               self.option4, int(self.option4counter),
+                               self.date)
+        p.save()
+        return self
 
 
-  def extractquestion(self, num):
-    counter=0
-    for i in self.votinglist:
-      counter+=1
-      if counter == num:
-        result = i.split(':')
-        return result[0], result[1]
-    return "0"
+def extractfromdb(request, idtoextract):  # extraction from db
+    tmp = models.VotingsBase.objects.filter(id=idtoextract).values()[0]
+    print(tmp)  # return the whole information about voting
+    return render(request, 'login.html')
 
 
-  def synchronizewithdatabase(self):
-    #need to add id/question/votinglist into a database
-    first = self.extractquestion(1)
-    second = self.extractquestion(2)
-    third = self.extractquestion(3)
-    fourth = self.extractquestion(4)
-    p = models.VotingsBase( self.author,
-                            self.question, len(self.votinglist),
-                            first[0], int(first[1]),
-                            second[0], int(second[1]),
-                            third[0], int(third[1]),
-                            fourth[0], int(fourth[1]),
-                            datetime.now())
-    p.save()
-    return True
+def calculate_the_percentage(d):
+    counter = 0
+    ss = 0
+    result = []
+    for num in d:
+        counter += 1
+        ss += int(num)
 
-def extractfromdb(request):
-  tmp=models.VotingsBase.objects.filter(id=1).values()[0]
-  print(tmp)#return the whole information about voting
-  return render(request, 'login.html')
+    for num in d:
+        tmp = (num / ss) * 100
+        tmp = int(tmp)
+        result.append(tmp)
+
+    for num in result:
+        if sum(result) < 100:
+            result[0] += 1
+
+    return result
 
 
-def testing(request):#test to add values to db
-  ne = models.VotingsBase(authorid=1,question="Are u ready?",options=4,
-                          option1="yes",option1counter=10,
-                          option2="actually no",option2counter=5,
-                          option3="of course",option3counter=13,
-                          option4="hell yeah",option4counter=45, date=datetime.now())
+def friendly_extract_for_profile(authorid):
+    dataextr = {}
+    dataextr["votes_history"] = []
 
-  ne.save()
-  return render(request, 'login.html')
+    dat = models.VotingsBase.objects.filter(authorid=authorid).values_list()
+    for object in dat:
+        print(object)
+        if object[3] == 4:
+            perc = (calculate_the_percentage([object[3], object[5], object[7], object[9]]))
+            query = [{'title': object[4], 'percentage': perc[0]},
+                     {'title': object[6], 'percentage': perc[1]},
+                     {'title': object[8], 'percentage': perc[2]},
+                     {'title': object[10], 'percentage': perc[3]}]
+        if object[3] == 3:
+            query = [{'title': object[4], 'percentage': object[3]},
+                     {'title': object[6], 'percentage': object[5]},
+                     {'title': object[8], 'percentage': object[7]}]
+        if object[3] == 2:
+            query = [{'title': object[4], 'percentage': object[3]},
+                     {'title': object[6], 'percentage': object[5]}]
+
+        dataextr['votes_history'] = [query]
+
+    return dataextr
+
+
+def testing(request):  # test to add values to db
+    ne = models.VotingsBase(authorid=1, question="Are u ready?", options=4,
+                            option1="yes", option1counter=10,
+                            option2="actually no", option2counter=5,
+                            option3="of course", option3counter=13,
+                            option4="hell yeah", option4counter=45, date=datetime.now())
+
+    ne.save()
+    return render(request, 'login.html')

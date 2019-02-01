@@ -1,11 +1,8 @@
-from urllib.parse import urlparse
+from django.contrib import messages
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
-from django.contrib.sites.shortcuts import get_current_site
-from django.shortcuts import render, redirect
-from django.core.exceptions import ObjectDoesNotExist
-from django.contrib import messages
 from django.db import IntegrityError
+from django.shortcuts import render, redirect
 from django.urls import NoReverseMatch
 
 from votation.forms import RegistrationForm, LoginForm
