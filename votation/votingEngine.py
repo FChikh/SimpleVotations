@@ -1,6 +1,6 @@
 # oopsie doopsie
 from datetime import datetime
-
+from votation import models
 from django.shortcuts import render
 import random
 class Complex:
@@ -105,7 +105,8 @@ def friendly_extract_for_profile(authorid):
              {'title': object[6], 'percentage': object[5]}]
 
 
-    dataextr['votes_history'] = [query]
+    dataextr['votes_history'].append(query)
+    print(dataextr)
 
   return dataextr
 
