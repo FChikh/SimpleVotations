@@ -87,11 +87,12 @@ def friendly_extract_for_profile(authorid):
   dataextr["votes_history"] = []
 
   dat = models.VotingsBase.objects.filter(authorid=authorid).values_list()
+  query=[]
   for object in dat:
     print(object)
     if object[3] == 4:
       perc=(calculate_the_percentage([object[3], object[5], object[7], object[9]]))
-      query=[{'title': object[4], 'percentage':perc[0]},
+      query = [{'title': object[4], 'percentage':perc[0]},
              {'title': object[6], 'percentage': perc[1]},
              {'title': object[8], 'percentage': perc[2]},
              {'title': object[10], 'percentage': perc[3]}]
@@ -110,9 +111,9 @@ def friendly_extract_for_profile(authorid):
 
 
 def testing(request):  # test to add values to db
-  ne = models.VotingsBase(authorid=1, question="Are u ready?",options=4,
-                          option1="yes",option1counter=10,
-                          option2="actually no", option2counter=5,
+  ne = models.VotingsBase(authorid=1, question="ARE YOU GAY?",options=4,
+                          option1="GGGGG",option1counter=10,
+                          option2="hehheh no", option2counter=5,
                           option3="of course", option3counter=13,
                           option4="hell yeah", option4counter=45, date=datetime.now())
 

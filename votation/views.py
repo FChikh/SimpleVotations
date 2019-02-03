@@ -19,6 +19,7 @@ def main(request):
                 "percentage": 70
             }
         ]
+        
     ]
     # Хардкод
     data["votes"] *= 10
@@ -35,7 +36,9 @@ def profile(request):
 
 
     data = (votingEngine.friendly_extract_for_profile(1))
+    print(data)
     data['name'] = request.user.username
     data['surname'] = request.user.email
     print(data)
+
     return render(request, "profile.html", data)
