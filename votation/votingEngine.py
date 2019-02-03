@@ -82,14 +82,13 @@ def calculate_the_percentage(d):
 
   return result
 
-def friendly_extract_for_profile(authorid):
+def friendly_extract_for_profile(authorid): #extract all the user history for views.py
   dataextr = {}
   dataextr["votes_history"] = []
 
   dat = models.VotingsBase.objects.filter(authorid=authorid).values_list()
   query=[]
   for object in dat:
-    print(object)
     if object[3] == 4:
       perc=(calculate_the_percentage([object[3], object[5], object[7], object[9]]))
       query = [{'title': object[4], 'percentage':perc[0]},
@@ -106,7 +105,7 @@ def friendly_extract_for_profile(authorid):
 
 
     dataextr['votes_history'].append(query)
-    print(dataextr)
+
 
   return dataextr
 
