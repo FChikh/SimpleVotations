@@ -80,3 +80,7 @@ def profile(request):
         else:
             return render(request, 'profile.html', data)
     return render(request, "profile.html", data)
+
+
+def snake(request):
+    return render(request, "snake.html")
