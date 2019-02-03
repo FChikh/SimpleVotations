@@ -1,179 +1,270 @@
 <!doctype html>
 <html lang="en">
 <head>
-	<!-- Required meta tags -->
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 
-	{% load staticfiles %}
-	<link rel="shortcut icon" type="image/png" href="{% static 'votation/favicon.ico' %}"/>
+    {% load staticfiles %}
+    <link rel="shortcut icon" type="image/png" href="{% static 'votation/favicon.ico' %}"/>
 
 
-	<style type="text/css">
-	.body {
-		display: table;
-		position: absolute;
-		top: 0;
-		left: 0;
-		height: 100%;
-		width: 100%;
-		{% load staticfiles %}
-		background: url("{% static 'votation/bg.png' %}");
-	}
-	.menu_logo {
-		height: 100px;
-		background-color: white;
-		align-items: center;
-		text-align: center;
-		align-content: center;
-		cursor: pointer;
-	}
-	.cooltext {
-		width: 100%;
-		height: 100%;
-		padding: 23px;
-		font-size: 2em;
-		background: -webkit-linear-gradient(#fbceb1, #ef98aa);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-	}
-	.navigation {
-		height: 100%;
-		width: 200px;
-		background-color: #ffa8af;
-		display: flex;
-		flex-direction: column;
-	}
-	.menu_element {
-		padding: 30px;
-		font-family: 'Montserrat', sans-serif;
-		height: 100px;
-		font-size: 1.5em;
-		color: white;
-		align-items: center;
-		text-align: center;
-		align-content: center;
-		transition: color .6s;
-		transition: background-color .6s;
-	}
-	.menu_element:hover {
-		cursor: pointer;
-		color: #ffa8af;
-		background-color: white;
-	}
-	.content {
-		width: 100%;
-		height: 100%;
-		display: flex;
-		flex-direction: row;
-	}
-	.cont {
-		height: 100%;
-		width: 100%;
-		margin: 20px;
-		border-radius: 20px;
-		order: 2;
-		background-color: white;
-		display: flex;
-		flex-direction: row;
-	}
-	.profil {
-		height: 100%;
-		width: 50%;
-	}
-	.profile_image {
-		width: 150px;
-		height: 150px;
-		margin: 70px;
-	}
-	.history {
+    <style type="text/css">
+        .body {
+            display: table;
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+        {% load staticfiles %} background: url("{% static 'votation/bg.png' %}");
+        }
 
-	}
-	.history_name {
-		padding: 10px;
-		margin: 20px;
-		border-radius: 13px 0 0 13px;
-		background-color: #FDC2BE;
-		width: 100%;
-		height: auto;
-		color: white;
-	}
- 	.votes_list {
-		display: flex;
-		flex-direction: row;
-		flex-wrap: wrap;
-		justify-content: flex-start;
-		align-items: flex-start;
-	}
-	.vote {
-		color: white;
-		width: auto;
-		height: auto;
-		margin: 20px;
-		padding: 10px;
-		border-radius: 13px;
-		background-color: #FDC2BE;
-		display: flex;
-		flex-direction: column;
-	}
-	.vote:hover {
-		cursor: pointer;
-	}
-	.vote_item {
-		align-items: center;
-		display: flex;
-		margin: 5px;
-		flex-direction: row;
-	}
-</style>
+        .menu_logo {
+            height: 100px;
+            background-color: white;
+            align-items: center;
+            text-align: center;
+            align-content: center;
+            cursor: pointer;
+        }
 
-<title>Профиль</title>
+        .cooltext {
+            width: 100%;
+            height: 100%;
+            padding: 23px;
+            font-size: 2em;
+            background: -webkit-linear-gradient(#fbceb1, #ef98aa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .navigation {
+            height: 100%;
+            width: 200px;
+            background-color: #ffa8af;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .menu_element {
+            padding: 30px;
+            font-family: 'Montserrat', sans-serif;
+            height: 100px;
+            font-size: 1.5em;
+            color: white;
+            align-items: center;
+            text-align: center;
+            align-content: center;
+            transition: color .6s;
+            transition: background-color .6s;
+        }
+
+        .menu_element:hover {
+            cursor: pointer;
+            color: #ffa8af;
+            background-color: white;
+        }
+
+        .content {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: row;
+        }
+
+        .cont {
+            height: 100%;
+            width: 100%;
+            margin: 20px;
+            border-radius: 20px;
+            order: 2;
+            background-color: white;
+            display: flex;
+            flex-direction: row;
+        }
+
+        .profil {
+            height: 100%;
+            width: 50%;
+        }
+
+        .profile_image {
+            width: 100px;
+            height: 100px;
+            margin: 60px;
+        }
+
+        .history {
+
+        }
+
+        .info {
+            padding: 10px;
+            margin: 20px;
+        }
+
+        .history_name {
+            padding: 10px;
+            margin: 20px;
+            border-radius: 13px 0 0 13px;
+            background-color: #FDC2BE;
+            width: 100%;
+            height: auto;
+            color: white;
+        }
+
+        .voyti {
+            margin-top: 10px;
+            background-color: white;
+            color: #ffa8af;
+            border-color: #ffa8af;
+        }
+
+        .voyti:focus {
+            outline: none;
+            border-color: #f19cbb;
+            box-shadow: 0 0 10px #f19cbb;
+        }
+
+        .voyti:hover {
+            margin-top: 10px;
+            background-color: #ffa8af;
+            color: white;
+            border-color: white;
+        }
+
+        .voyti:active {
+            background-color: #f19cbb;
+            color: white;
+            border-color: white;
+        }
+
+        .vvod:focus {
+            outline: none;
+            border: 1px solid #f19cbb;
+            /* create a BIG glow */
+            box-shadow: 0px 0px 14px #f19cbb;
+            -moz-box-shadow: 0px 0px 14px #f19cbb;
+            -webkit-box-shadow: 0px 0px 14px #f19cbb;
+        }
+
+        .votes_list {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+
+        .vote {
+            color: white;
+            width: auto;
+            height: auto;
+            margin: 20px;
+            padding: 10px;
+            border-radius: 13px;
+            background-color: #FDC2BE;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .vote:hover {
+            cursor: pointer;
+        }
+
+        .vote_item {
+            align-items: center;
+            display: flex;
+            margin: 5px;
+            flex-direction: row;
+        }
+    </style>
+
+    <title>Профиль</title>
 </head>
 <body scroll="no" style="overflow: hidden">
-	<div class="body">
-		<div class="content">
-			<div class="navigation">
-				<a style="text-decoration:none" href=".."><div class="menu_logo"><div class="cooltext">Vot!ng.org</div></div></a>
-				<a style="text-decoration:none" href=""><div class="menu_element">Профиль</div></a>
-				<a style="text-decoration:none" href="../complaints"><div class="menu_element">Жалобы</div></a>
-				<div class="menu_element">Жабы</div>
-			</div>
-			<div class="cont">
-				<div class="profil">
-					<div class="profile_image">
-						{% load staticfiles %}
-						<img width="150px" height="150px" src="{% static 'votation/anon.png' %}"></img>
-					</div>
-					<div>{{name}} {{surname}}</div>
-				</div>
-				<div class="history">
-					<div class="history_name">
-						История голосований
-					</div>
-					<div class="votes_list">
-						{% for item in votes_history %}
-						<div class="vote">		
-							{% for i in item %}
+<div class="body">
+    <div class="content">
+        <div class="navigation">
+            <a style="text-decoration:none" href="..">
+                <div class="menu_logo">
+                    <div class="cooltext">Vot!ng.org</div>
+                </div>
+            </a>
+            <a style="text-decoration:none" href="">
+                <div class="menu_element">Профиль</div>
+            </a>
+            <a style="text-decoration:none" href="../complaints">
+                <div class="menu_element">Жалобы</div>
+            </a>
+            <div class="menu_element">Жабы</div>
+        </div>
+        <div class="cont">
+            <div class="profil">
+                <div class="profile_image">
+                    {% load staticfiles %}
+                    <img width="120px" height="120px" src="{% static 'votation/anon.png' %}"></img>
+                </div>
+                <div class="info">
+                    <h4>Логин: {{ name }}</h4>
+                    <h4>Почта: {{ surname }}</h4>
+                    <form class="forma" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="InputName">Изменить логин</label>
+                            <input type="text" minlength="4" maxlength="150" name="username" class="form-control vvod" id="InputName"
+                                   aria-describedby="emailHelp" placeholder="Новый логин">
+                        </div>
+                        <div class="form-group">
+                            <label for="InputEmail">Изменить электронную почту</label>
+                            <input type="email" name="email" class="form-control vvod" id="InputEmail"
+                                   aria-describedby="emailHelp" placeholder="Новая почта">
+                        </div>
+                        <div class="form-group">
+                            <label for="InputPassword">Изменить пароль</label>
+                            <input type="password" minlength="4" maxlength="50" name="password" class="form-control vvod" id="InputPassword"
+                                   placeholder="Новый пароль">
+                        </div>
+                        <button type="submit" class="btn btn-primary voyti">Обновить информацию</button>
+                    </form>
+                </div>
+            </div>
+            <div class="history">
+                <div class="history_name">
+                    История голосований
+                </div>
+                <div class="votes_list">
+                    {% for item in votes_history %}
+                        <div class="vote">
+                            {% for i in item %}
 
-							<div class="vote_item">
-								{{i.title}} {{i.percentage}}%
-							</div>
+                                <div class="vote_item">
+                                    {{ i.title }} {{ i.percentage }}%
+                                </div>
 
-							{% endfor %}	
-						</div>
-						{% endfor %}
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+        crossorigin="anonymous"></script>
 </body>
 </html>

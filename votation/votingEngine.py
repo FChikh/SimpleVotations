@@ -1,6 +1,6 @@
-#oopsie doopsie
-from votation import models
+# oopsie doopsie
 from datetime import datetime
+
 from django.shortcuts import render
 import random
 class Complex:
@@ -119,3 +119,4 @@ def testing(request):  # test to add values to db
 
   ne.save()
   return render(request, 'login.html')
+
