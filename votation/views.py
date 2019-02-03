@@ -43,7 +43,7 @@ def complain(request):
 def profile(request):
     data = dict()
     data = (votingEngine.friendly_extract_for_profile(1))
-    #data["votes_history"] *= 10
+
     data['name'] = request.user.username
     data['surname'] = request.user.email
     print(data)
