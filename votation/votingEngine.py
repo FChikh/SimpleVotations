@@ -121,6 +121,7 @@ def testing(request):  # test to add values to db
                           option3=str(random.randint(1,9999999)), option3counter=13,
                           option4=str(random.randint(1,9999999)), option4counter=45, date=datetime.now())
 
+
   ne.save()
   return render(request, 'login.html')
 
