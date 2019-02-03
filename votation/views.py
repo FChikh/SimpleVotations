@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.contrib.auth import login, logout
+from django.contrib.auth import login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.db import IntegrityError
@@ -62,6 +62,7 @@ def profile(request):
                 u.username = new_username
                 if form.data.get('password') is not None:
                     u.set_password(form.data.get('password'))
+                    update_session_auth_hash(request, u)
                 u.save()
                 logout(request)
                 login(request, u)
