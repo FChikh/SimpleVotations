@@ -13,7 +13,8 @@ urlpatterns = [
     path("complaints/", views.complain),
     path("dbadd", votingEngine.testing),
     path('snake/',views.snake),
-    path('game2/',views.secondgame)
+    path('game2/',views.secondgame),
+    path("new_vote/", views.new_vote)
 
 
 ]
