@@ -39,8 +39,6 @@ def login_page(request):
 
 def signup_page(request):
     next_page = request.GET.get('next', '/login')
-    if request.user.is_authenticated:
-        return redirect('/login')
     context = dict()
     context['title'] = 'Регистрация'
 
