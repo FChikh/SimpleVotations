@@ -1,16 +1,17 @@
 <!doctype html>
 <html lang="en">
 <head>
-	<!-- Required meta tags -->
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-	{% load staticfiles %}
-	<link rel="shortcut icon" type="image/png" href="{% static 'votation/favicon.ico' %}"/>
-	<style type="text/css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    {% load staticfiles %}
+    <link rel="shortcut icon" type="image/png" href="{% static 'votation/favicon.ico' %}"/>
+    <style type="text/css">
 	.body {
 		display: table;
 		position: absolute;
@@ -108,27 +109,83 @@
 		text-align: center;
 		font-size: 1.3em;
 	}
-</style>
+    .forma {
+        margin: 60px;
+        color: #FDC2BE;
+    }
 
-<title>Создать голосование</title>
+
+
+    </style>
+
+    <title>Создать голосование</title>
 </head>
 <body scroll="no" style="overflow: hidden">
-	<div class="body">
-		<div class="content">
-			<div class="navigation">
-				<a style="text-decoration:none" href=".."><div class="menu_logo"><div class="cooltext">Vot!ng.org</div></div></a>
-				<a style="text-decoration:none" href="../profile"><div class="menu_element">Профиль</div></a>
-				<a style="text-decoration:none" href="../complaints"><div class="menu_element">Жалобы</div></a>
-				<a style="text-decoration:none" href="../game"><div class="menu_element">Жабы</div></a>
-			</div>
-			<div class="cont">
+<div class="body">
+    <div class="content">
+        <div class="navigation">
+            <a style="text-decoration:none" href="..">
+                <div class="menu_logo">
+                    <div class="cooltext">Vot!ng.org</div>
+                </div>
+            </a>
+            <a style="text-decoration:none" href="../profile">
+                <div class="menu_element">Профиль</div>
+            </a>
+            <a style="text-decoration:none" href="../complaints">
+                <div class="menu_element">Жалобы</div>
+            </a>
+            <a style="text-decoration:none" href="../game">
+                <div class="menu_element">Жабы</div>
+            </a>
+        </div>
+        <div class="cont">
+            <form class="forma" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="InputTitle">Название голосования</label>
+                    <input required type="text" minlength="4" maxlength="150" name="title"
+                           class="form-control vvod"
+                           id="InputTitle" aria-describedby="emailHelp" placeholder="Дайте ему имя"/>
+                </div>
+                <div class="form-group">
+                    <label for="Input1">Первый варик</label>
+                    <input required type="text" maxlength="50" name="var1"
+                           class="form-control vvod"
+                           id="Input1" placeholder="1 Вариант">
+                </div>
+                <div class="form-group">
+                    <label for="Input2">Второй варик</label>
+                    <input required type="text" maxlength="50" name="var2"
+                           class="form-control vvod"
+                           id="Input2" placeholder="2 Вариант">
+                </div>
+                <div class="form-group">
+                    <label for="Input3">Третий варик</label>
+                    <input type="text" maxlength="50" name="var3"
+                           class="form-control vvod"
+                           id="Input3" placeholder="3 Вариант">
+                </div>
+                <div class="form-group">
+                    <label for="Input4">Последний варик</label>
+                    <input type="text" maxlength="50" name="var4"
+                           class="form-control vvod"
+                           id="Input4" placeholder="4 Вариант">
+                </div>
+                <button type="submit" class="btn btn-primary voyti">Создать голосование</button>
+            </form>
+        </div>
+    </div>
+</div>
 
-			</div>
-		</div>
-	</div>
-
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+        crossorigin="anonymous"></script>
 </body>
 </html>
