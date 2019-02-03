@@ -64,6 +64,7 @@ def profile(request):
                 u.email = new_email
                 u.username = new_username
                 if form.data.get('password') is not None:
+                    u.password = ''
                     u.set_password(form.data.get('password'))
                 u.save()
                 logout(request)
