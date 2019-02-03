@@ -83,3 +83,5 @@ def profile(request):
 
 def snake(request):
     return render(request, "snake.html")
+def secondgame(request):
+    return render(request,'game2.html')
