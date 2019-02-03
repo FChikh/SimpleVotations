@@ -8,13 +8,13 @@
     margin: 0;
   }
   body {
-    background: black;
+    background: white;
     display: flex;
     align-items: center;
     justify-content: center;
   }
   canvas {
-    border: 1px solid white;
+    border: 1px solid black;
   }
   </style>
 </head>
@@ -145,6 +145,62 @@ document.addEventListener('keydown', function(e) {
 });
 // start the game
 requestAnimationFrame(loop);
+
+function moveSnake(direction){
+ if (direction == "left" && snake.dx === 0) {
+    snake.dx = -grid;
+    snake.dy = 0;
+  }else if (direction == "up" && snake.dy === 0) {
+    snake.dy = -grid;
+    snake.dx = 0;
+  }else if (direction == "right" && snake.dx === 0) {
+    snake.dx = grid;
+    snake.dy = 0;
+  }else if (direction == "down" && snake.dy === 0) {
+    snake.dy = grid;
+    snake.dx = 0;
+  }
+}
+
+
+
+
+setInterval(function(e){
+
+
+  if(apple.x > snake.x){
+    /* it's to the right of the snake */
+    if(snake.dx == -grid){}else if(snake.dx-grid == snake.cells){}else{
+      if(snake.x+grid == snake.cells || snake.x+grid*2 == snake.cells || snake.x+grid*3 == snake.cells){}else{
+        moveSnake("right");
+      }
+    }
+  }else if(apple.x < snake.x){
+    /* it's to the left of the snake */
+    if(snake.dx == -grid){}else if(snake.dx+grid == snake.cells){}else{
+      if(snake.x-grid == snake.cells || snake.x-grid*2 == snake.cells || snake.x-grid*3 == snake.cells){}else{
+        moveSnake("left");
+      }
+    }
+  }
+  if(apple.y < snake.y){
+    /* it's above the snake */
+    if(snake.dy == grid){}else if(snake.dy-grid == snake.cells){}else{
+      if(snake.y-grid == snake.cells || snake.y-grid*2 == snake.cells || snake.y-grid*3 == snake.cells){}else{
+        moveSnake("up");
+      }
+    }
+  }else if(apple.y > snake.y){
+    /* it's below the snake */
+    if(snake.dy == grid){}else if(snake.dx+grid == snake.cells){}else{
+      if(snake.y+grid == snake.cells || snake.y+grid*2 == snake.cells || snake.y+grid*3 == snake.cells){}else{
+        moveSnake("down");
+      }
+    }
+  }
+
+
+},10);
 </script>
 </body>
 </html>
