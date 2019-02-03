@@ -38,6 +38,10 @@ def complain(request):
     return render(request, "complaints.html", data)
 
 
+def new_vote(request):
+    data = dict()
+    return render(request, "new_vote.html", data)
+
 @login_required
 def profile(request):
     data = dict()

@@ -12,7 +12,8 @@ urlpatterns = [
     path("profile/", views.profile),
     path("complaints/", views.complain),
     path("dbadd", votingEngine.testing),
-    path('snake/',views.snake)
+    path('snake/',views.snake),
+    path("new_vote/", views.new_vote)
 
 
 ]
