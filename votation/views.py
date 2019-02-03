@@ -46,6 +46,9 @@ def game(request):
 def new_vote(request):
     data = dict()
     print(request)
+    if request.method == "POST":
+        votingEngine.addvoting(request)
+
     return render(request, "new_vote.html", data)
 
 

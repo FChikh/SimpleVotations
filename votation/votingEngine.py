@@ -126,7 +126,22 @@ def testing(request):  # test to add values to db
                           option3=str(random.randint(1,9999999)), option3counter=13,
                           option4=str(random.randint(1,9999999)), option4counter=45, date=datetime.now())
 
-
   ne.save()
   return render(request, 'login.html')
 
+def addvoting(request):
+  votingfielddata = request.POST
+  userids = request.user.id
+  vars=[]
+
+  for i in range(1,5):
+    if votingfielddata['var'+str(i)] != "":
+      vars.append(votingfielddata['var'+str(i)])
+  numofvars = len(vars)
+  ne = models.VotingsBase(authorid=userids, question=votingfielddata['title'], options=numofvars,
+                          option1=vars[0], option1counter=0,
+                          option2=vars[1], option2counter=0,
+                          option3= vars[2], option3counter=0,
+                          option4=vars[3], option4counter=0, date=datetime.now())
+  ne.save()
+  return render(request, 'profile.html')
