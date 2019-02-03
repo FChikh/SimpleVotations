@@ -79,14 +79,16 @@
         }
 
         .cont {
-            height: 100%;
-            width: 100%;
+            height: 95%;
+            width: 95%;
             margin: 20px;
             border-radius: 20px;
             order: 2;
             background-color: white;
             display: flex;
             flex-direction: row;
+            max-width: 100%;
+            overflow-x: hidden;
         }
 
         .profil {
@@ -189,6 +191,15 @@
             margin: 5px;
             flex-direction: row;
         }
+
+        .vote_header {
+            align-items: center;
+            display: flex;
+            margin: 5px;
+            flex-direction: row;
+            font-size: 1.5em;
+        }
+
     </style>
 
     <title>Профиль</title>
@@ -208,7 +219,9 @@
             <a style="text-decoration:none" href="../complaints">
                 <div class="menu_element">Жалобы</div>
             </a>
-				<a style="text-decoration:none" href="../game"><div class="menu_element">Жабы</div></a>
+            <a style="text-decoration:none" href="../game">
+                <div class="menu_element">Жабы</div>
+            </a>
         </div>
         <div class="pre-scrollable cont">
             <div class="profil">
@@ -223,7 +236,8 @@
                         {% csrf_token %}
                         <div class="form-group">
                             <label for="InputName">Изменить логин</label>
-                            <input type="text" minlength="4" maxlength="150" name="username" class="form-control vvod" id="InputName"
+                            <input type="text" minlength="4" maxlength="150" name="username" class="form-control vvod"
+                                   id="InputName"
                                    aria-describedby="emailHelp" placeholder="Новый логин">
                         </div>
                         <div class="form-group">
@@ -233,7 +247,8 @@
                         </div>
                         <div class="form-group">
                             <label for="InputPassword">Изменить пароль</label>
-                            <input type="password" minlength="4" maxlength="50" name="password" class="form-control vvod" id="InputPassword"
+                            <input type="password" minlength="4" maxlength="50" name="password"
+                                   class="form-control vvod" id="InputPassword"
                                    placeholder="Новый пароль">
                         </div>
                         <button type="submit" class="btn btn-primary voyti">Обновить информацию</button>
@@ -246,12 +261,18 @@
                 </div>
                 <div class="votes_list">
                     {% for item in votes_history %}
+
                         <div class="vote">
                             {% for i in item %}
-
-                                <div class="vote_item">
-                                    {{ i.title }} {{ i.percentage }}%
-                                </div>
+                                {% if i.maintitle != None %}
+                                    <div class="vote_header">
+                                        {{ i.maintitle }}
+                                    </div>
+                                {% else %}
+                                    <div class="vote_item">
+                                        {{ i.title }} {{ i.percentage }}%
+                                    </div>
+                                {% endif %}
 
                             {% endfor %}
                         </div>
