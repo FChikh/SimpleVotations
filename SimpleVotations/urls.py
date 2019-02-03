@@ -13,6 +13,7 @@ urlpatterns = [
     path("complaints/", views.complain),
     path("dbadd", votingEngine.testing),
     path('game/', views.game),
+    path("new_vote/", views.new_vote)
 ]
 
 urlpatterns += staticfiles_urlpatterns()

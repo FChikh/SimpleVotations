@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.contrib.auth import login, logout
+from django.contrib.auth import login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.db import IntegrityError
@@ -43,6 +43,11 @@ def game(request):
     return render(request, ["snake.html", "game2.html"][randint(0, 1)], {})
 
 
+def new_vote(request):
+    data = dict()
+    return render(request, "new_vote.html", data)
+
+
 @login_required
 def profile(request):
     data = dict()
@@ -69,7 +74,9 @@ def profile(request):
                 u.email = new_email
                 u.username = new_username
                 if form.data.get('password') is not None:
+                    u.password = ''
                     u.set_password(form.data.get('password'))
+                    update_session_auth_hash(request, u)
                 u.save()
                 logout(request)
                 login(request, u)
