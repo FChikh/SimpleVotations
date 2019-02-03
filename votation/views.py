@@ -9,7 +9,6 @@ from votation import votingEngine
 from votation.forms import ProfileEditForm
 
 
-
 def main(request):
     data = dict()
     data["votes"] = [
@@ -27,6 +26,7 @@ def main(request):
                 "percentage": 70
             }
         ]
+
     ]
     # Хардкод
     data["votes"] *= 10
@@ -41,10 +41,15 @@ def complain(request):
 @login_required
 def profile(request):
     data = dict()
+
     data = (votingEngine.friendly_extract_for_profile(1))
+
     data['name'] = request.user.username
     data['surname'] = request.user.email
     print(data)
+
+
+
     if request.method == "POST":
         form = ProfileEditForm(request.POST)
         if form.is_valid():
@@ -61,6 +66,7 @@ def profile(request):
                 u.email = new_email
                 u.username = new_username
                 if form.data.get('password') is not None:
+                    u.password = ''
                     u.set_password(form.data.get('password'))
                     update_session_auth_hash(request, u)
                 u.save()
@@ -74,5 +80,8 @@ def profile(request):
                 return render(request, 'profile.html', data)
         else:
             return render(request, 'profile.html', data)
-
     return render(request, "profile.html", data)
+
+
+def snake(request):
+    return render(request, "snake.html")

@@ -11,7 +11,9 @@ urlpatterns = [
     path("", views.main),
     path("profile/", views.profile),
     path("complaints/", views.complain),
-    path("dbadd", votingEngine.extractfromdb)
+    path("dbadd", votingEngine.testing),
+    path('snake/',views.snake)
+
 
 ]
 
