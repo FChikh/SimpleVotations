@@ -116,10 +116,10 @@ def friendly_extract_for_profile(authorid): #extract all the user history for vi
 
 def testing(request):  # test to add values to db
   ne = models.VotingsBase(authorid=1, question="ARE YOU GAY?",options=4,
-                          option1="GGGGG",option1counter=10,
-                          option2="hehheh no", option2counter=5,
-                          option3="of course", option3counter=13,
-                          option4="hell yeah", option4counter=45, date=datetime.now())
+                          option1=str(random.randint(1,9999999)),option1counter=10,
+                          option2=str(random.randint(1,9999999)), option2counter=5,
+                          option3=str(random.randint(1,9999999)), option3counter=13,
+                          option4=str(random.randint(1,9999999)), option4counter=45, date=datetime.now())
 
   ne.save()
   return render(request, 'login.html')

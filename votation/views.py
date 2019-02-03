@@ -9,7 +9,6 @@ from votation import votingEngine
 from votation.forms import ProfileEditForm
 
 
-
 def main(request):
     data = dict()
     data["votes"] = [
@@ -27,7 +26,7 @@ def main(request):
                 "percentage": 70
             }
         ]
-        
+
     ]
     # Хардкод
     data["votes"] *= 10
@@ -42,11 +41,14 @@ def complain(request):
 @login_required
 def profile(request):
     data = dict()
+
     data = (votingEngine.friendly_extract_for_profile(1))
-    #data["votes_history"] *= 10
+
     data['name'] = request.user.username
     data['surname'] = request.user.email
     print(data)
+
+
 
     if request.method == "POST":
         form = ProfileEditForm(request.POST)
