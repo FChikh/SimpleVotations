@@ -48,25 +48,7 @@ def profile(request):
     data['surname'] = request.user.email
     print(data)
 
-    data["votes_history"] = [
-        [
-            {
-                "title": "Собачки",
-                "percentage": 10
-            },
-            {
-                "title": "Котики",
-                "percentage": 20
-            },
-            {
-                "title": "Единая Россия",
-                "percentage": 70
-            }
-        ]
 
-    ]
-    # Хардкод
-    data["votes_history"] *= 10
 
     if request.method == "POST":
         form = ProfileEditForm(request.POST)
