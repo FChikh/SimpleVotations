@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.shortcuts import render
+from random import randint
 
 from votation import votingEngine
 from votation.forms import ProfileEditForm
@@ -38,6 +39,10 @@ def complain(request):
     return render(request, "complaints.html", data)
 
 
+def game(request):
+    return render(request, ["snake.html", "game2.html"][randint(0, 1)], {})
+
+
 @login_required
 def profile(request):
     data = dict()
@@ -47,8 +52,6 @@ def profile(request):
     data['name'] = request.user.username
     data['surname'] = request.user.email
     print(data)
-
-
 
     if request.method == "POST":
         form = ProfileEditForm(request.POST)
@@ -83,5 +86,7 @@ def profile(request):
 
 def snake(request):
     return render(request, "snake.html")
+
+
 def secondgame(request):
-    return render(request,'game2.html')
+    return render(request, 'game2.html')

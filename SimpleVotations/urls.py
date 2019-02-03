@@ -12,10 +12,7 @@ urlpatterns = [
     path("profile/", views.profile),
     path("complaints/", views.complain),
     path("dbadd", votingEngine.testing),
-    path('snake/',views.snake),
-    path('game2/',views.secondgame)
-
-
+    path('game/', views.game),
 ]
 
 urlpatterns += staticfiles_urlpatterns()
