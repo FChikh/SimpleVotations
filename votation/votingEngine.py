@@ -3,6 +3,10 @@ from datetime import datetime
 
 from django.shortcuts import render
 import random
+
+from votation import models
+
+
 class Complex:
   def __init__(self, authorsid, question, options,
                           option1=None ,option1counter=None,
