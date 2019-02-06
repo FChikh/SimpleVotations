@@ -139,9 +139,23 @@ def addvoting(request):
       vars.append(votingfielddata['var'+str(i)])
   numofvars = len(vars)
   #kostil activated (c) Semen
-  vars.append('')
-  vars.append('')
-  vars.append('')
+  try:
+    vars.remove('')
+  except ValueError:
+    pass
+  try:
+    vars.remove('')
+  except ValueError:
+    pass
+  try:
+    vars.remove('')
+  except ValueError:
+    pass
+  vars.append("")
+  vars.append("")
+  vars.append("")
+  vars.append("")
+  # kostil который фиксит пропуски в строчках при создании голосования, чтоб никто не мог забагать строчки
   ne = models.VotingsBase(authorid=userids, question=votingfielddata['title'], options=numofvars,
                           option1=vars[0], option1counter=0,
                           option2=vars[1], option2counter=0,
