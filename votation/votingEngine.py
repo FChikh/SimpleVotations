@@ -64,8 +64,11 @@ def extractfromdb(request, idtoextract): #extraction from db
   print(tmp)  # return the whole information about voting
   return render(request, 'login.html')
 
-
-
+def percent(num1, num2):
+  num1 = float(num1)
+  num2 = float(num2)
+  percentage = '{0:.3f}'.format((num1 / num2 * 100))
+  return percentage
 
 def calculate_the_percentage(d):
   counter=0
@@ -76,13 +79,7 @@ def calculate_the_percentage(d):
     ss += int(num)
 
   for num in d:
-    tmp= (num/ss)*100
-    tmp = int(tmp)
-    result.append(tmp)
-
-  for num in result:
-    if sum(result)<100:
-      result[0]+=1
+    result.append(percent(num,ss))
 
   return result
 
