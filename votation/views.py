@@ -38,7 +38,8 @@ def complain(request):
     data = {}
     return render(request, "complaints.html", data)
 
-
+def metro(request):
+    return render(request,'newmetro.html')
 def game(request):
     return render(request, ["snake.html", "game2.html"][randint(0, 1)], {})
 

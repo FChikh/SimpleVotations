@@ -133,11 +133,15 @@ def addvoting(request):
   votingfielddata = request.POST
   userids = request.user.id
   vars=[]
-
+  print(len(votingfielddata))
   for i in range(1,5):
     if votingfielddata['var'+str(i)] != "":
       vars.append(votingfielddata['var'+str(i)])
   numofvars = len(vars)
+  #kostil activated (c) Semen
+  vars.append('')
+  vars.append('')
+  vars.append('')
   ne = models.VotingsBase(authorid=userids, question=votingfielddata['title'], options=numofvars,
                           option1=vars[0], option1counter=0,
                           option2=vars[1], option2counter=0,
