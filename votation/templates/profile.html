@@ -199,6 +199,10 @@
             flex-direction: row;
             font-size: 1.5em;
         }
+        .alert {
+            position: absolute;
+            width: 100%;
+        }
 
     </style>
 
@@ -237,19 +241,19 @@
                         <div class="form-group">
                             <label for="InputName">Изменить логин</label>
                             <input type="text" minlength="4" maxlength="150" name="username" class="form-control vvod"
-                                   id="InputName"
+                                   required id="InputName"
                                    aria-describedby="emailHelp" placeholder="Новый логин" value="{{name}}">
                         </div>
                         <div class="form-group">
                             <label for="InputEmail">Изменить электронную почту</label>
-                            <input type="email" name="email" class="form-control vvod" id="InputEmail"
+                            <input type="email" name="email" required class="form-control vvod" id="InputEmail"
                                    aria-describedby="emailHelp" placeholder="Новая почта" value="{{surname}}">
                         </div>
                         <div class="form-group">
-                            <label for="InputPassword">Изменить пароль (по умолчанию: password)</label>
-                            <input type="password" minlength="4" maxlength="50" name="password"
+                            <label for="InputPassword">Изменить пароль</label>
+                            <input type="password" minlength="8" maxlength="50" name="password"
                                    class="form-control vvod" id="InputPassword"
-                                   placeholder="Новый пароль" value="password">
+                                   placeholder="Новый пароль" value="">
                         </div>
                         <button type="submit" class="btn btn-primary voyti">Обновить информацию</button>
                     </form>
@@ -282,6 +286,12 @@
         </div>
     </div>
 </div>
+
+{% for message in messages %}
+    <div class="alert alert-light" role="alert">
+        {{ message }}
+    </div>
+{% endfor %}
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

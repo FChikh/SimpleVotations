@@ -79,7 +79,8 @@ def profile(request): # main func to form all the data for a profile cout
                 u = User.objects.get(username=data['name'])
                 u.email = new_email
                 u.username = new_username
-                if form.data.get('password') is not None:
+                u.save()
+                if form.data.get('password') is not '':
                     u.password = ''
                     u.set_password(form.data.get('password'))
                     update_session_auth_hash(request, u)
