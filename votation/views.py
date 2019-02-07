@@ -57,7 +57,7 @@ def new_vote(request):
 def profile(request):
     data = dict()
 
-    data = (votingEngine.friendly_extract_for_profile(1))
+    data = (votingEngine.friendly_extract_for_profile(request.user.id))
 
     data['name'] = request.user.username
     data['surname'] = request.user.email
