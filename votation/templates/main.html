@@ -108,6 +108,18 @@
 		text-align: center;
 		font-size: 1.3em;
 	}
+	.vote_header {
+		align-items: center;
+		display: flex;
+		margin: 5px;
+		flex-direction: row;
+		font-size: 1.5em;
+    }
+    .alert {
+        position: absolute;
+        width: 100%;
+        opacity: .9;
+    }
 </style>
 
 <title>Главная</title>
@@ -124,17 +136,24 @@
 			<div class="cont">
 				<div class="votes_list">
                     <a style="text-decoration:none" href="../new_vote"><div class="vote add">Добавить</div></a>
-					{% for item in votes %}
-						<div class="vote">		
-								{% for i in item %}
+                    {% for item in votes_history %}
 
-								<div class="vote_item">
-									{{i.title}} {{i.percentage}}%
-								</div>
+                        <div class="vote">
+                            {% for i in item %}
+                                {% if i.maintitle != None %}
+                                    <div class="vote_header">
+                                        {{ i.maintitle }}
+                                    </div>
+                                {% else %}
+                                    <div class="vote_item">
+                                        {{ i.title }} {{ i.percentage }}%
+                                    </div>
+                                {% endif %}
 
-							{% endfor %}	
-						</div>
-					{% endfor %}
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                </div>
 				</div>
 			</div>
 		</div>

@@ -12,25 +12,7 @@ from votation.forms import ProfileEditForm
 
 def main(request): #main page
     data = dict()
-    data["votes"] = [
-        [
-            {
-                "title": "Собачки",
-                "percentage": 10
-            },
-            {
-                "title": "Котики",
-                "percentage": 20
-            },
-            {
-                "title": "Единая Россия",
-                "percentage": 70
-            }
-        ]
-
-    ]
-    # Хардкод
-    data["votes"] *= 10
+    data = votingEngine.friendly_extract_for_everyone()
     return render(request, "main.html", data)
 
 
@@ -71,10 +53,6 @@ def profile(request): # main func to form all the data for a profile cout
                 user_old = User.objects.get(username=data['name'])
                 new_username = form.data.get('username')
                 new_email = form.data.get('email')
-                if new_username is None:
-                    new_username = user_old.username
-                if new_email is None:
-                    new_email = user_old.email
                 print(new_username, new_email)
                 u = User.objects.get(username=data['name'])
                 u.email = new_email

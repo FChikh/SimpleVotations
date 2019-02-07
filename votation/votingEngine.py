@@ -116,6 +116,39 @@ def friendly_extract_for_profile(authorid): #extract all the user's history for 
 
   return dataextr
 
+def friendly_extract_for_everyone(): #extract all the user's history for views.py
+  dataextr = {}
+  dataextr["votes_history"] = []
+
+  dat = models.VotingsBase.objects.all().values_list()
+  query=[]
+  # creating a dict of history
+  for object in dat:
+    if object[3] == 4:
+      perc=(calculate_the_percentage([object[3], object[5], object[7], object[9]]))
+      query = [
+              {'maintitle': object[2]},
+              {'title': object[4], 'percentage':perc[0]},
+             {'title': object[6], 'percentage': perc[1]},
+             {'title': object[8], 'percentage': perc[2]},
+             {'title': object[10], 'percentage': perc[3]}]
+    if object[3] == 3:
+      query=[{'maintitle': object[2]},
+              {'title': object[4], 'percentage':object[3]},
+             {'title': object[6], 'percentage': object[5]},
+             {'title': object[8], 'percentage': object[7]}]
+    if object[3] == 2:
+      query=[
+          {'maintitle': object[2]},
+        {'title': object[4], 'percentage':object[3]},
+             {'title': object[6], 'percentage': object[5]}]
+
+
+    dataextr['votes_history'].append(query)
+
+
+  return dataextr
+
 
 def testing(request):  # test to add values to db
   ne = models.VotingsBase(authorid=1, question="working?",options=4,
