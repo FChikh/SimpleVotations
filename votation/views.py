@@ -28,7 +28,7 @@ def game(request): #easter egg
 
 def new_vote(request): # getting data from form
     data = dict()
-    print(request)
+    #print(request)
     if request.method == "POST":
         votingEngine.addvoting(request)
 
@@ -44,7 +44,7 @@ def profile(request): # main func to form all the data for a profile cout
 
     data['name'] = request.user.username
     data['surname'] = request.user.email
-    print(data)
+    #print(data)
 
     if request.method == "POST":
         form = ProfileEditForm(request.POST)
@@ -53,7 +53,7 @@ def profile(request): # main func to form all the data for a profile cout
                 user_old = User.objects.get(username=data['name'])
                 new_username = form.data.get('username')
                 new_email = form.data.get('email')
-                print(new_username, new_email)
+                #print(new_username, new_email)
                 u = User.objects.get(username=data['name'])
                 u.email = new_email
                 u.username = new_username

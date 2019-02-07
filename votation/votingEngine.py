@@ -61,13 +61,13 @@ class Complex:
 
 def extractfromdb(request, idtoextract): #extraction from db by a request and i to extract
   tmp=models.VotingsBase.objects.filter(id=idtoextract).values()[0]
-  print(tmp)  # return the whole information about voting
+  #print(tmp)  # return the whole information about voting
   return render(request, 'login.html')
 
 def percent(num1, num2): #percent calculations
   num1 = float(num1)
   num2 = float(num2)
-  percentage = '{0:.3f}'.format((num1 / num2 * 100))
+  percentage = '{0:.1f}'.format((num1 / num2 * 100))
   return percentage
 
 def calculate_the_percentage(d): #making a list of % for each option
@@ -77,9 +77,20 @@ def calculate_the_percentage(d): #making a list of % for each option
   for num in d:
     counter += 1
     ss += int(num)
+  if ss == 0:
+    return [0]*len(d)
 
+  percsum = 0
   for num in d:
-    result.append(percent(num,ss))
+    percsum += float(percent(num, ss))
+    result.append(percent(num, ss))
+
+  # making the final sum be 100
+  result[0] = '{0:.1f}'.format(float(result[0]) + float((100.0-percsum)))
+
+
+
+
 
   return result
 
@@ -92,7 +103,7 @@ def friendly_extract_for_profile(authorid): #extract all the user's history for 
   # creating a dict of history
   for object in dat:
     if object[3] == 4:
-      perc=(calculate_the_percentage([object[3], object[5], object[7], object[9]]))
+      perc=(calculate_the_percentage([object[5], object[7], object[9], object[11]]))
       query = [
               {'maintitle': object[2]},
               {'title': object[4], 'percentage':perc[0]},
@@ -100,54 +111,24 @@ def friendly_extract_for_profile(authorid): #extract all the user's history for 
              {'title': object[8], 'percentage': perc[2]},
              {'title': object[10], 'percentage': perc[3]}]
     if object[3] == 3:
+      perc = (calculate_the_percentage([object[5], object[7], object[9]]))
       query=[{'maintitle': object[2]},
-              {'title': object[4], 'percentage':object[3]},
-             {'title': object[6], 'percentage': object[5]},
-             {'title': object[8], 'percentage': object[7]}]
-    if object[3] == 2:
-      query=[
-          {'maintitle': object[2]},
-        {'title': object[4], 'percentage':object[3]},
-             {'title': object[6], 'percentage': object[5]}]
-
-
-    dataextr['votes_history'].append(query)
-
-
-  return dataextr
-
-def friendly_extract_for_everyone(): #extract all the user's history for views.py
-  dataextr = {}
-  dataextr["votes_history"] = []
-
-  dat = models.VotingsBase.objects.all().values_list()
-  query=[]
-  # creating a dict of history
-  for object in dat:
-    if object[3] == 4:
-      perc=(calculate_the_percentage([object[3], object[5], object[7], object[9]]))
-      query = [
-              {'maintitle': object[2]},
               {'title': object[4], 'percentage':perc[0]},
              {'title': object[6], 'percentage': perc[1]},
-             {'title': object[8], 'percentage': perc[2]},
-             {'title': object[10], 'percentage': perc[3]}]
-    if object[3] == 3:
-      query=[{'maintitle': object[2]},
-              {'title': object[4], 'percentage':object[3]},
-             {'title': object[6], 'percentage': object[5]},
-             {'title': object[8], 'percentage': object[7]}]
+             {'title': object[8], 'percentage': perc[2]}]
     if object[3] == 2:
+      perc = (calculate_the_percentage([object[5], object[7]]))
       query=[
           {'maintitle': object[2]},
-        {'title': object[4], 'percentage':object[3]},
-             {'title': object[6], 'percentage': object[5]}]
+        {'title': object[4], 'percentage':perc[0]},
+             {'title': object[6], 'percentage': perc[1]}]
 
 
     dataextr['votes_history'].append(query)
 
 
   return dataextr
+
 
 
 def testing(request):  # test to add values to db
@@ -165,13 +146,13 @@ def addvoting(request): #func to add voting to db
   votingfielddata = request.POST
   userids = request.user.id
   vars=[]
-  print(len(votingfielddata))
 
   for i in range(1, 5):
     if votingfielddata['var'+str(i)] != "":
       vars.append(votingfielddata['var'+str(i)])
   numofvars = len(vars)
-  #kostil activated (c) Semen
+
+  # kostil activated (c) Semen
 
   try:
     vars.remove('')
@@ -190,7 +171,9 @@ def addvoting(request): #func to add voting to db
   vars.append("")
   vars.append("")
   vars.append("")
+
   # noone will crash server by leaving blank lines :D
+
   ne = models.VotingsBase(authorid=userids, question=votingfielddata['title'], options=numofvars,
                           option1=vars[0], option1counter=0,
                           option2=vars[1], option2counter=0,
