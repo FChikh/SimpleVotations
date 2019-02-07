@@ -74,3 +74,7 @@ def profile(request): # main func to form all the data for a profile cout
         else:
             return render(request, 'profile.html', data)
     return render(request, "profile.html", data)
+
+
+def voting(request):
+    return render(request, "voting.html")
