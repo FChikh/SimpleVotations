@@ -102,9 +102,11 @@ def friendly_extract_for_profile(authorid): #extract all the user's history for 
   query=[]
   # creating a dict of history
   for object in dat:
+    print(object)
     if object[3] == 4:
       perc=(calculate_the_percentage([object[5], object[7], object[9], object[11]]))
       query = [
+              {'id': object[0] },
               {'maintitle': object[2]},
               {'title': object[4], 'percentage':perc[0]},
              {'title': object[6], 'percentage': perc[1]},
@@ -112,15 +114,18 @@ def friendly_extract_for_profile(authorid): #extract all the user's history for 
              {'title': object[10], 'percentage': perc[3]}]
     if object[3] == 3:
       perc = (calculate_the_percentage([object[5], object[7], object[9]]))
-      query=[{'maintitle': object[2]},
+      query=[
+              {'id': object[0]},
+              {'maintitle': object[2]},
               {'title': object[4], 'percentage':perc[0]},
              {'title': object[6], 'percentage': perc[1]},
              {'title': object[8], 'percentage': perc[2]}]
     if object[3] == 2:
       perc = (calculate_the_percentage([object[5], object[7]]))
       query=[
-          {'maintitle': object[2]},
-        {'title': object[4], 'percentage':perc[0]},
+            {'id': object[0]},
+            {'maintitle': object[2]},
+            {'title': object[4], 'percentage':perc[0]},
              {'title': object[6], 'percentage': perc[1]}]
 
 
