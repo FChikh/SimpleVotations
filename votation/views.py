@@ -10,7 +10,7 @@ from votation import votingEngine
 from votation.forms import ProfileEditForm
 
 
-def main(request):
+def main(request): #main page
     data = dict()
     data["votes"] = [
         [
@@ -34,17 +34,17 @@ def main(request):
     return render(request, "main.html", data)
 
 
-def complain(request):
+def complain(request): # complain page
     data = {}
     return render(request, "complaints.html", data)
 
-def metro(request):
+def metro(request): #easter egg
     return render(request,'newmetro.html')
-def game(request):
+def game(request): #easter egg
     return render(request, ["snake.html", "game2.html"][randint(0, 1)], {})
 
 
-def new_vote(request):
+def new_vote(request): # getting data from form
     data = dict()
     print(request)
     if request.method == "POST":
@@ -54,7 +54,8 @@ def new_vote(request):
 
 
 @login_required
-def profile(request):
+def profile(request): # main func to form all the data for a profile cout
+
     data = dict()
 
     data = (votingEngine.friendly_extract_for_profile(request.user.id))

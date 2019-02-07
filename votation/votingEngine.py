@@ -59,18 +59,18 @@ class Complex:
     return self
 
 
-def extractfromdb(request, idtoextract): #extraction from db
+def extractfromdb(request, idtoextract): #extraction from db by a request and i to extract
   tmp=models.VotingsBase.objects.filter(id=idtoextract).values()[0]
   print(tmp)  # return the whole information about voting
   return render(request, 'login.html')
 
-def percent(num1, num2):
+def percent(num1, num2): #percent calculations
   num1 = float(num1)
   num2 = float(num2)
   percentage = '{0:.3f}'.format((num1 / num2 * 100))
   return percentage
 
-def calculate_the_percentage(d):
+def calculate_the_percentage(d): #making a list of % for each option
   counter=0
   ss=0
   result=[]
@@ -83,12 +83,13 @@ def calculate_the_percentage(d):
 
   return result
 
-def friendly_extract_for_profile(authorid): #extract all the user history for views.py
+def friendly_extract_for_profile(authorid): #extract all the user's history for views.py
   dataextr = {}
   dataextr["votes_history"] = []
 
   dat = models.VotingsBase.objects.filter(authorid=authorid).values_list()
   query=[]
+  # creating a dict of history
   for object in dat:
     if object[3] == 4:
       perc=(calculate_the_percentage([object[3], object[5], object[7], object[9]]))
@@ -117,25 +118,28 @@ def friendly_extract_for_profile(authorid): #extract all the user history for vi
 
 
 def testing(request):  # test to add values to db
-  ne = models.VotingsBase(authorid=1, question="ARE YOU GAY?",options=4,
+  ne = models.VotingsBase(authorid=1, question="working?",options=4,
                           option1=str(random.randint(1,9999999)),option1counter=10,
                           option2=str(random.randint(1,9999999)), option2counter=5,
                           option3=str(random.randint(1,9999999)), option3counter=13,
                           option4=str(random.randint(1,9999999)), option4counter=45, date=datetime.now())
 
   ne.save()
+
   return render(request, 'login.html')
 
-def addvoting(request):
+def addvoting(request): #func to add voting to db
   votingfielddata = request.POST
   userids = request.user.id
   vars=[]
   print(len(votingfielddata))
-  for i in range(1,5):
+
+  for i in range(1, 5):
     if votingfielddata['var'+str(i)] != "":
       vars.append(votingfielddata['var'+str(i)])
   numofvars = len(vars)
   #kostil activated (c) Semen
+
   try:
     vars.remove('')
   except ValueError:
@@ -148,15 +152,17 @@ def addvoting(request):
     vars.remove('')
   except ValueError:
     pass
+
   vars.append("")
   vars.append("")
   vars.append("")
   vars.append("")
-  # kostil который фиксит пропуски в строчках при создании голосования, чтоб никто не мог забагать строчки
+  # noone will crash server by leaving blank lines :D
   ne = models.VotingsBase(authorid=userids, question=votingfielddata['title'], options=numofvars,
                           option1=vars[0], option1counter=0,
                           option2=vars[1], option2counter=0,
                           option3= vars[2], option3counter=0,
                           option4=vars[3], option4counter=0, date=datetime.now())
   ne.save()
+
   return render(request, 'profile.html')
