@@ -8,7 +8,7 @@ from random import randint
 from votation import models
 from votation import votingEngine
 from votation.forms import ProfileEditForm
-
+from datetime import datetime
 
 def main(request):  # main page
     data = dict()
@@ -80,20 +80,29 @@ def profile(request):  # main func to form all the data for a profile cout
             return render(request, 'profile.html', data)
     return render(request, "profile.html", data)
 
-
+@login_required
 def voting(request):
     if request.POST:
-        votingvar = (request.POST['voteVariant'])
+        current_user = int(request.user.id)
+        try:
+            votingvar = (request.POST['voteVariant'])
+        except:
+            return render(request, "voting.html")
+
         votingid = (request.GET.get('id'))
         dbcoonnect = models.VotingsBase.objects.filter(id=votingid)
         dbcoonnect1 = models.VotingsBase.objects.get(id=votingid)
         dblist=dbcoonnect.values_list()
         counter=-1
-        print(votingvar)
         t=models.VotingsBase.objects.get(id=votingid)
-        print(dblist[0])
+
+        ss=models.VotingHistory.objects.filter(userid=current_user).filter(golosid=votingid).values_list()
+
+
+
         try:
             if dblist[0][4]==votingvar:
+
                 t.option1counter += 1
                 t.save()
         except:
@@ -118,7 +127,7 @@ def voting(request):
                 t.save()
         except:
             pass
-        
+
 
 
 
