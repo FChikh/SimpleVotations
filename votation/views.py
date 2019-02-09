@@ -118,11 +118,8 @@ def voting(request):
                 t.save()
         except:
             pass
-        
 
-
-
-    if request.method in ["GET"]:
+    if request.method in ["GET", "POST"]:
         id = request.GET["id"]
         dat = models.VotingsBase.objects.filter(id=id).values_list()
 
