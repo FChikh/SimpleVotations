@@ -173,9 +173,11 @@
 <div class="body">
     <div class="content">
         <div class="navigation">
-            <div class="menu_logo">
-                <div class="cooltext">Vot!ng.org</div>
-            </div>
+            <a style="text-decoration:none" href="..">
+                <div class="menu_logo">
+                    <div class="cooltext">Vot!ng.org</div>
+                </div>
+            </a>
             <a style="text-decoration:none" href="../profile">
                 <div class="menu_element">Профиль</div>
             </a>
@@ -185,19 +187,25 @@
             <a style="text-decoration:none" href="../game">
                 <div class="menu_element">Жабы</div>
             </a>
+            <a style="text-decoration:none" href="../logout">
+                <div class="menu_element">Выйти</div>
+            </a>
         </div>
         <div class="cont">
             <form class="forma" method="POST">
                 {% csrf_token %}
-                <h3>{{ maintitle }}</h3>
+                <h2>{{ maintitle }}</h2>
                 <br>
-                {% for item in variants %}
-                    <div class="form-check">
-                        <input class="form-check form-check-inline" type="radio" id="1" value="1">
-                        <label class="form-check-label" for="1">{{ item.0 }}: {{ item.1 }}</label>
-                    </div>
-                    <br>
-                {% endfor %}
+                <fieldset class="form-group">
+                    {% for item in variants %}
+                        <div class="form-check">
+                            <input class="form-check form-check-inline" name="voteVariant" type="radio" id="1"
+                                   value="1">
+                            <label class="form-check-label" for="1">{{ item.0 }}: {{ item.1 }}</label>
+                        </div>
+                        <br>
+                    {% endfor %}
+                </fieldset>
                 <button type="submit" class="btn btn-primary voyti">Проголосовать</button>
             </form>
         </div>

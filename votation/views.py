@@ -10,25 +10,29 @@ from votation import votingEngine
 from votation.forms import ProfileEditForm
 
 
-def main(request): #main page
+def main(request):  # main page
     data = dict()
     data = votingEngine.friendly_extract_for_everyone()
     return render(request, "main.html", data)
 
 
-def complain(request): # complain page
+def complain(request):  # complain page
     data = {}
     return render(request, "complaints.html", data)
 
-def metro(request): #easter egg
-    return render(request,'newmetro.html')
-def game(request): #easter egg
+
+def metro(request):  # easter egg
+    return render(request, 'newmetro.html')
+
+
+def game(request):  # easter egg
     return render(request, ["snake.html", "game2.html"][randint(0, 1)], {})
 
+
 @login_required
-def new_vote(request): # getting data from form
+def new_vote(request):  # getting data from form
     data = dict()
-    #print(request)
+    # print(request)
     if request.method == "POST":
         votingEngine.addvoting(request)
         return redirect('/')
@@ -37,7 +41,7 @@ def new_vote(request): # getting data from form
 
 
 @login_required
-def profile(request): # main func to form all the data for a profile cout
+def profile(request):  # main func to form all the data for a profile cout
 
     data = dict()
 
@@ -45,7 +49,7 @@ def profile(request): # main func to form all the data for a profile cout
 
     data['name'] = request.user.username
     data['surname'] = request.user.email
-    #print(data)
+    # print(data)
 
     if request.method == "POST":
         form = ProfileEditForm(request.POST)
@@ -54,7 +58,7 @@ def profile(request): # main func to form all the data for a profile cout
                 user_old = User.objects.get(username=data['name'])
                 new_username = form.data.get('username')
                 new_email = form.data.get('email')
-                #print(new_username, new_email)
+                # print(new_username, new_email)
                 u = User.objects.get(username=data['name'])
                 u.email = new_email
                 u.username = new_username
@@ -78,19 +82,24 @@ def profile(request): # main func to form all the data for a profile cout
 
 
 def voting(request):
-    if request.method == "GET":
-        id=request.GET["id"]
+    if request.method in ["GET", "POST"]:
+        id = request.GET["id"]
         dat = models.VotingsBase.objects.filter(id=id).values_list()
 
-        dat=dat[0]
-        res={}
-        vars=[]
-        res['id']=dat[0]
-        res['authorid']=dat[1]
-        res['maintitle']=dat[2]
+        dat = dat[0]
+        res = {}
+        vars = []
+        res['id'] = dat[0]
+        res['authorid'] = dat[1]
+        res['maintitle'] = dat[2]
 
-        for i in range(4,4+dat[3]*2, 2):
-            vars.append([dat[i], dat[i+1]])
+        for i in range(4, 4 + dat[3] * 2, 2):
+            vars.append([dat[i], dat[i + 1]])
         res['variants'] = vars
-        return render(request, "voting.html",res)
+        return render(request, "voting.html", res)
     return render(request, "voting.html")
+
+
+def logout_func(request):
+    logout(request)
+    return redirect('/')
