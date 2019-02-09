@@ -92,10 +92,17 @@ def voting(request):
         res['id'] = dat[0]
         res['authorid'] = dat[1]
         res['maintitle'] = dat[2]
+        res['cnt'] = 0
 
         for i in range(4, 4 + dat[3] * 2, 2):
             vars.append([dat[i], dat[i + 1]])
+            res['cnt'] += int(dat[i + 1])
         res['variants'] = vars
+        for i in vars:
+            if res['cnt'] != 0:
+                i.append(round(int(i[1]) / res['cnt'] * 100))
+            else:
+                i.append(15)
         return render(request, "voting.html", res)
     return render(request, "voting.html")
 

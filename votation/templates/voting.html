@@ -136,7 +136,7 @@
         }
 
         .forma {
-            margin: 60px;
+            margin: 80px;
             color: #FDC2BE;
         }
 
@@ -165,6 +165,23 @@
             color: white;
             border-color: white;
         }
+
+        .diagram {
+            margin-left: 80px;
+            margin-right: 80px;
+            width: auto
+        }
+
+        .progress {
+            margin-top: 6px;
+            height: 30px
+        }
+
+        .bg {
+            background-color: #ffa8af;
+            color: white;
+        }
+
     </style>
 
     <title>Голосование</title>
@@ -208,6 +225,23 @@
                 </fieldset>
                 <button type="submit" class="btn btn-primary voyti">Проголосовать</button>
             </form>
+            <div class="diagram">
+                {% for item in variants %}
+                    {% if item.1 != 0 %}
+                    <div class="progress">
+                        <div class="progress-bar bg" role="progressbar" style="width: {{ item.2 }}%"
+                             aria-valuenow="{{ item.2 }}"
+                             aria-valuemin="0" aria-valuemax="100">{{ item.0 }}</div>
+                    </div>
+                    {% else %}
+                        <div class="progress">
+                        <div class="progress-bar bg" role="progressbar" style="width: 0%"
+                             aria-valuenow="100"
+                             aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
         </div>
     </div>
 </div>
