@@ -83,8 +83,33 @@ def profile(request):  # main func to form all the data for a profile cout
 
 def voting(request):
     if request.POST:
-        print(request.POST['voteVariant'])
-        print(request.POST['id'])
+        votingvar = (request.POST['voteVariant'])
+        votingid = (request.GET.get('id'))
+        dbcoonnect = models.VotingsBase.objects.filter(id=votingid)
+        dbcoonnect1 = models.VotingsBase.objects.get(id=votingid)
+        dblist=dbcoonnect.values_list()
+        counter=-1
+        for i in dblist[0]:
+            counter+=1
+            if i==4 or i==6 or i==8 or i==10:
+                if (dblist[0])[i]==votingvar:
+                    t=models.VotingsBase.objects.get(id=votingid)
+                    if i==4:
+                        t.option1counter += 1
+                        t.save()
+                    if i==6:
+                        t.option2counter += 1
+                        t.save()
+                    if i==8:
+                        t.option3counter += 1
+                        t.save()
+                    if i==10:
+                        t.option4counter += 1
+                        t.save()
+
+
+
+
     if request.method in ["GET"]:
         id = request.GET["id"]
         dat = models.VotingsBase.objects.filter(id=id).values_list()
