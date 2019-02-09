@@ -94,6 +94,107 @@ def calculate_the_percentage(d): #making a list of % for each option
 
   return result
 
+def new_friendly_extract_for_profile(authorid):
+  dataextr = {}
+  dataextr["votes_history"] = []
+
+  dat = models.VotingsBase.objects.filter(authorid=authorid).values_list()
+  query = {}
+  perc=()
+  for object in dat:
+    ##################
+    if object[3] == 4:
+      perc = (calculate_the_percentage([object[5], object[7], object[9], object[11]]))
+      vars={
+        object[4]: perc[0],
+        object[6]: perc[1],
+        object[8]: perc[2],
+        object[10]: perc[3]
+            }
+      query = {
+        'id': object[0],
+        'maintitle': object[2],
+        'variants': vars
+        }
+      #####################
+    if object[3] == 3:
+      perc = (calculate_the_percentage([object[5], object[7], object[9]]))
+      vars={
+        object[4]: perc[0],
+        object[6]: perc[1],
+        object[8]: perc[2]
+            }
+      query = {
+        'id': object[0],
+        'maintitle': object[2],
+        'variants': vars
+        }
+      ####################
+    if object[3] == 2:
+      perc = (calculate_the_percentage([object[5], object[7]]))
+      vars={
+        object[4]: perc[0],
+        object[6]: perc[1]
+            }
+      query = {
+        'id': object[0],
+        'maintitle': object[2],
+        'variants': vars
+        }
+
+    dataextr['votes_history'].append(query)
+  return dataextr
+
+def new_friendly_extract_for_everyone():
+  dataextr = {}
+  dataextr["votes_history"] = []
+
+  dat = models.VotingsBase.objects.all().values_list()
+  query = {}
+  perc = ()
+  for object in dat:
+    #####################
+    if object[3] == 4:
+      perc = (calculate_the_percentage([object[5], object[7], object[9], object[11]]))
+      vars = {
+        object[4]: perc[0],
+        object[6]: perc[1],
+        object[8]: perc[2],
+        object[10]: perc[3]
+      }
+      query = {
+        'id': object[0],
+        'maintitle': object[2],
+        'variants': vars
+      }
+      #####################
+    if object[3] == 3:
+      perc = (calculate_the_percentage([object[5], object[7], object[9]]))
+      vars = {
+        object[4]: perc[0],
+        object[6]: perc[1],
+        object[8]: perc[2]
+      }
+      query = {
+        'id': object[0],
+        'maintitle': object[2],
+        'variants': vars
+      }
+      ####################
+    if object[3] == 2:
+      perc = (calculate_the_percentage([object[5], object[7]]))
+      vars = {
+        object[4]: perc[0],
+        object[6]: perc[1]
+      }
+      query = {
+        'id': object[0],
+        'maintitle': object[2],
+        'variants': vars
+      }
+
+    dataextr['votes_history'].append(query)
+  return dataextr
 
 def friendly_extract_for_everyone():  # extract all the user's history for views.py
   dataextr = {}
@@ -129,7 +230,6 @@ def friendly_extract_for_everyone():  # extract all the user's history for views
         {'title': object[6], 'percentage': perc[1]}]
 
     dataextr['votes_history'].append(query)
-
   return dataextr
 
 def friendly_extract_for_profile(authorid): #extract all the user's history for views.py
