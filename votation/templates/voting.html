@@ -217,7 +217,7 @@
                     {% for item in variants %}
                         <div class="form-check">
                             <input class="form-check form-check-inline" name="voteVariant" type="radio" id="{{ item.0 }}"
-                                   value="{{ item.0 }}">
+                                   value="{{ item.0 }}" required>
                             <label class="form-check-label" for="{{ item.0 }}">{{ item.0 }}: {{ item.1 }}</label>
                         </div>
                         <br>

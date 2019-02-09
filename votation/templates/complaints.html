@@ -127,6 +127,50 @@
             -webkit-box-shadow: 0px 0px 14px #f19cbb;
         }
 
+        .votes_list {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+
+        .vote {
+            color: white;
+            width: auto;
+            height: auto;
+            margin: 20px;
+            padding: 10px;
+            border-radius: 13px;
+            background-color: #FDC2BE;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .vote:hover {
+            cursor: pointer;
+        }
+
+        .vote_item {
+            align-items: center;
+            display: flex;
+            margin: 5px;
+            flex-direction: row;
+        }
+
+        .vote_header {
+            align-items: center;
+            display: flex;
+            margin: 5px;
+            flex-direction: row;
+            font-size: 1.5em;
+        }
+
+        .alert {
+            position: absolute;
+            width: 100%;
+            opacity: .9;
+        }
 
 
     </style>
@@ -172,9 +216,32 @@
                 </div>
                 <button type="submit" class="btn btn-primary voyti">Отправить</button>
             </form>
+            <div class="votes_list">
+                {% for item in history %}
+                    <div class="vote">
+                        <div class="vote_item">
+                            Текст: {{ item.text }}
+                        </div>
+                        <div class="vote_item">
+                            Статус: {{ item.status }}
+                        </div>
+                        {% if item.status != "Не решена" %}
+                            <div class="vote_item">
+                                {{ item.answer }}
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
 </div>
+
+{% for message in messages %}
+    <div class="alert alert-light" role="alert">
+        {{ message }}
+    </div>
+{% endfor %}
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

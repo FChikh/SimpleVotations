@@ -25,13 +25,13 @@ def complain(request):  # complain page
         if form.is_valid():
             u = models.ReportsHistory.objects.create(text=form.data.get('report'),
                                                      author=request.user,
-                                                     status="unsolved",
+                                                     status="Не решена",
                                                      answer="")
             u.save()
+            messages.success(request, "Ваша жалоба успешно отправлена")
     if request.method in ["POST", "GET"]:
         context = dict()
-        context["history"] = models.ReportsHistory.objects.filter(author=request.user)
-        print(context['history'])
+        context["history"] = models.ReportsHistory.objects.filter(author=request.user).values()
 
     return render(request, "complaints.html", context)
 
@@ -146,6 +146,7 @@ def voting(request):
 
     if request.method in ["GET", "POST"]:
         id = request.GET["id"]
+        print(id)
         dat = models.VotingsBase.objects.filter(id=id).values_list()
 
         dat = dat[0]
