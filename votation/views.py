@@ -89,24 +89,36 @@ def voting(request):
         dbcoonnect1 = models.VotingsBase.objects.get(id=votingid)
         dblist=dbcoonnect.values_list()
         counter=-1
-        for i in dblist[0]:
-            counter+=1
-            if i==4 or i==6 or i==8 or i==10:
-                if (dblist[0])[i]==votingvar:
-                    t=models.VotingsBase.objects.get(id=votingid)
-                    if i==4:
-                        t.option1counter += 1
-                        t.save()
-                    if i==6:
-                        t.option2counter += 1
-                        t.save()
-                    if i==8:
-                        t.option3counter += 1
-                        t.save()
-                    if i==10:
-                        t.option4counter += 1
-                        t.save()
+        print(votingvar)
+        t=models.VotingsBase.objects.get(id=votingid)
+        print(dblist[0])
+        try:
+            if dblist[0][4]==votingvar:
+                t.option1counter += 1
+                t.save()
+        except:
+            pass
+        try:
+            if dblist[0][6]==votingvar:
+                t.option2counter += 1
+                t.save()
+        except:
+            pass
 
+        try:
+            if dblist[0][8]==votingvar:
+                t.option3counter += 1
+                t.save()
+        except:
+            pass
+
+        try:
+            if dblist[0][10]==votingvar:
+                t.option4counter += 1
+                t.save()
+        except:
+            pass
+        
 
 
 
