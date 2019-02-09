@@ -82,7 +82,10 @@ def profile(request):  # main func to form all the data for a profile cout
 
 
 def voting(request):
-    if request.method in ["GET", "POST"]:
+    if request.POST:
+        print(request.POST['voteVariant'])
+        print(request.POST['id'])
+    if request.method in ["GET"]:
         id = request.GET["id"]
         dat = models.VotingsBase.objects.filter(id=id).values_list()
 
