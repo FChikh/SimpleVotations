@@ -3,7 +3,7 @@ from django.contrib.auth import login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.db import IntegrityError
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from random import randint
 
 from votation import votingEngine
@@ -25,12 +25,13 @@ def metro(request): #easter egg
 def game(request): #easter egg
     return render(request, ["snake.html", "game2.html"][randint(0, 1)], {})
 
-
+@login_required
 def new_vote(request): # getting data from form
     data = dict()
     #print(request)
     if request.method == "POST":
         votingEngine.addvoting(request)
+        return redirect('/')
 
     return render(request, "new_vote.html", data)
 

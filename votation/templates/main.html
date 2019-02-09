@@ -138,18 +138,19 @@
                     <a style="text-decoration:none" href="../new_vote"><div class="vote add">Добавить</div></a>
                     {% for item in votes_history %}
 
-                        <div class="vote">
+                        <a style="text-decoration:none" href="../voting?id={{ item.0.id }}"><div class="vote">
                             {% for i in item %}
-                                {% if i.maintitle != None %}
-                                    <div class="vote_header">
-                                        {{ i.maintitle }}
-                                    </div>
-                                {% else %}
-                                    <div class="vote_item">
-                                        {{ i.title }} {{ i.percentage }}%
-                                    </div>
+                                {% if i.id == None %}
+                                    {% if i.maintitle != None %}
+                                        <div class="vote_header">
+                                            {{ i.maintitle }}
+                                        </div>
+                                    {% else %}
+                                        <div class="vote_item">
+                                            {{ i.title }} {{ i.percentage }}%
+                                        </div>
+                                    {% endif %}
                                 {% endif %}
-
                             {% endfor %}
                         </div>
                     {% endfor %}
