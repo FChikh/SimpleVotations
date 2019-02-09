@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.shortcuts import render, redirect
 from random import randint
-
+from votation import models
 from votation import votingEngine
 from votation.forms import ProfileEditForm
 
@@ -78,4 +78,9 @@ def profile(request): # main func to form all the data for a profile cout
 
 
 def voting(request):
+    if request.method == "GET":
+        id=request.GET["id"]
+        dat = models.VotingsBase.objects.filter(id=id).values_list()
+        #<QuerySet [(1, 1, 'Are u ready?', 4, 'yes', 10, 'actually no', 5, 'of course', 13, 'hell yeah', 45, datetime.datetime(2019, 1, 28, 18, 20, 54, 438225, tzinfo=<UTC>))]>
+        return render(request, "voting.html", dat)
     return render(request, "voting.html")
