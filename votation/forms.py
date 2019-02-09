@@ -56,3 +56,8 @@ class ProfileEditForm(forms.Form):
 
         widget=forms.PasswordInput(),
     )
+
+class VotingForm(forms.Form):
+    vote = forms.CharField(
+        max_length=1000, min_length=4, required=True,
+    )
