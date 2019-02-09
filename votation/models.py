@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 # Create your models here.
@@ -22,3 +23,9 @@ class VotingHistory(models.Model):
     golosid = models.IntegerField()
     userid = models.IntegerField()
     date = models.DateTimeField(null=True)
+
+class ReportsHistory(models.Model):
+    text = models.CharField(max_length=1000)
+    author = models.ForeignKey(to=User, on_delete=models.SET_NULL, null=True)
+    status = models.CharField(max_length=100)
+    answer = models.CharField(max_length=1000)

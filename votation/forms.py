@@ -62,3 +62,9 @@ class VotingForm(forms.Form):
     vote = forms.CharField(
         max_length=1000, min_length=4, required=True,
     )
+
+
+class Report(forms.Form):
+    report = forms.CharField(
+        max_length=1000, min_length=30, required=True,
+    )

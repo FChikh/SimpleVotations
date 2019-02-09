@@ -25,6 +25,37 @@
         {% load staticfiles %} background: url("{% static 'votation/bg.png' %}");
         }
 
+        .forma {
+            margin: 80px;
+            color: #FDC2BE;
+        }
+
+        .voyti {
+            margin-top: 10px;
+            background-color: white;
+            color: #ffa8af;
+            border-color: #ffa8af;
+        }
+
+        .voyti:focus {
+            outline: none;
+            border-color: #f19cbb;
+            box-shadow: 0 0 10px #f19cbb;
+        }
+
+        .voyti:hover {
+            margin-top: 10px;
+            background-color: #ffa8af;
+            color: white;
+            border-color: white;
+        }
+
+        .voyti:active {
+            background-color: #f19cbb;
+            color: white;
+            border-color: white;
+        }
+
         .menu_logo {
             height: 100px;
             background-color: white;
@@ -86,6 +117,18 @@
             order: 2;
             background-color: white;
         }
+
+        .vvod:focus {
+            outline: none;
+            border: 1px solid #f19cbb;
+            /* create a BIG glow */
+            box-shadow: 0px 0px 14px #f19cbb;
+            -moz-box-shadow: 0px 0px 14px #f19cbb;
+            -webkit-box-shadow: 0px 0px 14px #f19cbb;
+        }
+
+
+
     </style>
 
     <title>Жалобы</title>
@@ -113,7 +156,22 @@
             </a>
         </div>
         <div class="cont">
-
+            <form class="forma" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="InputName">Ваш логин</label>
+                    <input type="text" minlength="4" maxlength="150" name="username" class="form-control vvod"
+                           required id="InputName"
+                           aria-describedby="emailHelp" placeholder="Логин" value="{{ user.username }}" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="report">Жалоба</label>
+                    <textarea minlength="30" maxlength="1000" name="report" class="form-control vvod"
+                              required id="report"
+                              aria-describedby="emailHelp" placeholder="Чем вы недовольны?" value=""></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary voyti">Отправить</button>
+            </form>
         </div>
     </div>
 </div>

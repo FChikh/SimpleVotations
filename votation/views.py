@@ -7,7 +7,7 @@ from django.shortcuts import render, redirect
 from random import randint
 from votation import models
 from votation import votingEngine
-from votation.forms import ProfileEditForm
+from votation.forms import ProfileEditForm, Report
 
 
 def main(request):  # main page
@@ -16,9 +16,23 @@ def main(request):  # main page
     return render(request, "main.html", data)
 
 
+@login_required
 def complain(request):  # complain page
-    data = {}
-    return render(request, "complaints.html", data)
+    if request.method == "POST":
+        form = Report(request.POST)
+        print(form)
+        if form.is_valid():
+            u = models.ReportsHistory.objects.create(text=form.data.get('report'),
+                                                     author=request.user,
+                                                     status="unsolved",
+                                                     answer="")
+            u.save()
+    if request.method in ["POST", "GET"]:
+        context = dict()
+        context["history"] = models.ReportsHistory.objects.filter(author=request.user)
+        print(context['history'])
+
+    return render(request, "complaints.html", context)
 
 
 def metro(request):  # easter egg
@@ -139,7 +153,7 @@ def voting(request):
             if res['cnt'] != 0:
                 i.append(round(int(i[1]) / res['cnt'] * 100))
             else:
-                i.append(15)
+                i.append(0)
         return render(request, "voting.html", res)
     return render(request, "voting.html")
 
