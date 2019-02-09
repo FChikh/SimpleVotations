@@ -134,6 +134,37 @@
             width: 100%;
             opacity: .9;
         }
+
+        .forma {
+            margin: 60px;
+            color: #FDC2BE;
+        }
+
+        .voyti {
+            margin-top: 10px;
+            background-color: white;
+            color: #ffa8af;
+            border-color: #ffa8af;
+        }
+
+        .voyti:focus {
+            outline: none;
+            border-color: #f19cbb;
+            box-shadow: 0 0 10px #f19cbb;
+        }
+
+        .voyti:hover {
+            margin-top: 10px;
+            background-color: #ffa8af;
+            color: white;
+            border-color: white;
+        }
+
+        .voyti:active {
+            background-color: #f19cbb;
+            color: white;
+            border-color: white;
+        }
     </style>
 
     <title>Голосование</title>
@@ -156,7 +187,19 @@
             </a>
         </div>
         <div class="cont">
-
+            <form class="forma" method="POST">
+                {% csrf_token %}
+                <h3>{{ maintitle }}</h3>
+                <br>
+                {% for item in variants %}
+                    <div class="form-check">
+                        <input class="form-check form-check-inline" type="radio" id="1" value="1">
+                        <label class="form-check-label" for="1">{{ item.0 }}: {{ item.1 }}</label>
+                    </div>
+                    <br>
+                {% endfor %}
+                <button type="submit" class="btn btn-primary voyti">Проголосовать</button>
+            </form>
         </div>
     </div>
 </div>

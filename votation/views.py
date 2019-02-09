@@ -89,8 +89,8 @@ def voting(request):
         res['authorid']=dat[1]
         res['maintitle']=dat[2]
 
-        for i in range(4,4+dat[3]*2):
-            vars.append(dat[i])
-            res['variants'] = vars
+        for i in range(4,4+dat[3]*2, 2):
+            vars.append([dat[i], dat[i+1]])
+        res['variants'] = vars
         return render(request, "voting.html",res)
     return render(request, "voting.html")
