@@ -17,3 +17,8 @@ class VotingsBase(models.Model):
     option4 = models.CharField(max_length=50)
     option4counter = models.IntegerField()
     date = models.DateTimeField(null=True)
+
+class VotingHistory(models.Model):
+    golosid = models.IntegerField()
+    userid = models.IntegerField()
+    date = models.DateTimeField(null=True)
