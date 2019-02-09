@@ -81,6 +81,16 @@ def voting(request):
     if request.method == "GET":
         id=request.GET["id"]
         dat = models.VotingsBase.objects.filter(id=id).values_list()
-        #<QuerySet [(1, 1, 'Are u ready?', 4, 'yes', 10, 'actually no', 5, 'of course', 13, 'hell yeah', 45, datetime.datetime(2019, 1, 28, 18, 20, 54, 438225, tzinfo=<UTC>))]>
-        return render(request, "voting.html", dat)
+
+        dat=dat[0]
+        res={}
+        vars=[]
+        res['id']=dat[0]
+        res['authorid']=dat[1]
+        res['maintitle']=dat[2]
+
+        for i in range(4,4+dat[3]*2):
+            vars.append(dat[i])
+            res['variants'] = vars
+        return render(request, "voting.html",res)
     return render(request, "voting.html")
