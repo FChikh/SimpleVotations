@@ -153,7 +153,6 @@ def voting(request):
 
     if request.method in ["GET", "POST"]:
         id = request.GET["id"]
-        print(id)
         dat = models.VotingsBase.objects.filter(id=id).values_list()
 
         dat = dat[0]
