@@ -113,44 +113,42 @@ def voting(request):
 
         ss = models.VotingHistory.objects.filter(golosid=votingid).filter(userid=int(current_user))
 
-        if ss.exists():
-            return render(request, "voting.html")
+        if not ss.exists():
 
+            try:
+                if dblist[0][4]==votingvar:
+                    s = models.VotingHistory(golosid=int(votingid), userid=int(current_user))
+                    s.save()
+                    t.option1counter += 1
+                    t.save()
+            except:
+                pass
+            try:
+                if dblist[0][6]==votingvar:
+                    s = models.VotingHistory(golosid=int(votingid), userid=int(current_user))
+                    s.save()
+                    t.option2counter += 1
+                    t.save()
+            except:
+                pass
 
+            try:
+                if dblist[0][8]==votingvar:
+                    s = models.VotingHistory(golosid=int(votingid), userid=int(current_user))
+                    s.save()
+                    t.option3counter += 1
+                    t.save()
+            except:
+                pass
 
-
-        try:
-            if dblist[0][4]==votingvar:
-                s = models.VotingHistory(golosid=int(votingid), userid=int(current_user))
-                s.save()
-                t.option1counter += 1
-                t.save()
-                s = models.VotingHistory(golosid=votingid,userid=current_user,date=datetime.now)
-                s.save()
-
-
-        except:
-            pass
-        try:
-            if dblist[0][6]==votingvar:
-                t.option2counter += 1
-                t.save()
-        except:
-            pass
-
-        try:
-            if dblist[0][8]==votingvar:
-                t.option3counter += 1
-                t.save()
-        except:
-            pass
-
-        try:
-            if dblist[0][10]==votingvar:
-                t.option4counter += 1
-                t.save()
-        except:
-            pass
+            try:
+                if dblist[0][10]==votingvar:
+                    s = models.VotingHistory(golosid=int(votingid), userid=int(current_user))
+                    s.save()
+                    t.option4counter += 1
+                    t.save()
+            except:
+                pass
 
 
     if request.method in ["GET", "POST"]:
