@@ -20,6 +20,7 @@ class VotingsBase(models.Model):
     date = models.DateTimeField(null=True)
 
 class VotingHistory(models.Model):
+    id = models.AutoField(primary_key=True)
     golosid = models.IntegerField()
     userid = models.IntegerField()
     date = models.DateTimeField(null=True)

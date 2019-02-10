@@ -111,15 +111,24 @@ def voting(request):
         counter=-1
         t=models.VotingsBase.objects.get(id=votingid)
 
-        ss=models.VotingHistory.objects.filter(userid=current_user).filter(golosid=votingid).values_list()
+        ss = models.VotingHistory.objects.filter(golosid=votingid).filter(userid=int(current_user))
+
+        if ss.exists():
+            return render(request, "voting.html")
+
 
 
 
         try:
             if dblist[0][4]==votingvar:
-
+                s = models.VotingHistory(golosid=int(votingid), userid=int(current_user))
+                s.save()
                 t.option1counter += 1
                 t.save()
+                s = models.VotingHistory(golosid=votingid,userid=current_user,date=datetime.now)
+                s.save()
+
+
         except:
             pass
         try:
