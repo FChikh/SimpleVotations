@@ -41,7 +41,7 @@ def metro(request):  # easter egg
 
 
 def game(request):  # easter egg
-    return render(request, ["snake.html", "game2.html"][randint(0, 1)], {})
+    return render(request, ["snake.html", "game2.html"][randint(0, 0)], {})
 
 
 @login_required
