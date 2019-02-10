@@ -149,6 +149,8 @@ def voting(request):
                     t.save()
             except:
                 pass
+        else:
+            messages.error(request, 'Вы уже голосовали')
 
 
     if request.method in ["GET", "POST"]:
