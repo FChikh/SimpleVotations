@@ -134,6 +134,16 @@
             width: 100%;
             opacity: .9;
         }
+        .history_name {
+            font-size: 1.3em;
+            padding: 10px;
+            margin: 20px;
+            border-radius: 13px 0 0 13px;
+            background-color: #FDC2BE;
+            width: 100%;
+            height: auto;
+            color: white;
+        }
     </style>
 
     <title>Главная</title>
@@ -161,7 +171,12 @@
         <div class="cont">
             <div class="votes_list">
                 <a style="text-decoration:none" href="../new_vote">
-                    <div class="vote add">Добавить</div>
+
+                <div class="vote add">Добавить</div>
+                    
+                    <a style="text-decoration:none" href="profile">
+                    <div class="vote history">История голосований                </div>
+</a>
                 </a>
                 {% for item in votes_history %}
 
