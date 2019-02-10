@@ -7,210 +7,209 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
-          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     {% load staticfiles %}
     <link rel="shortcut icon" type="image/png" href="{% static 'votation/favicon.ico' %}"/>
     <style type="text/css">
-        .body {
-            display: table;
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 100%;
+    .body {
+        display: table;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
         {% load staticfiles %} background: url("{% static 'votation/bg.png' %}");
-        }
+    }
 
-        .menu_logo {
-            height: 100px;
-            background-color: white;
-            align-items: center;
-            text-align: center;
-            align-content: center;
-            cursor: pointer;
-        }
+    .menu_logo {
+        height: 100px;
+        background-color: white;
+        align-items: center;
+        text-align: center;
+        align-content: center;
+        cursor: pointer;
+    }
 
-        .cooltext {
-            width: 100%;
-            height: 100%;
-            padding: 23px;
-            font-size: 2em;
-            background: -webkit-linear-gradient(#fbceb1, #ef98aa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+    .cooltext {
+        width: 100%;
+        height: 100%;
+        padding: 23px;
+        font-size: 2em;
+        background: -webkit-linear-gradient(#fbceb1, #ef98aa);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
 
-        .navigation {
-            height: 100%;
-            width: 200px;
-            background-color: #ffa8af;
-            display: flex;
-            flex-direction: column;
-        }
+    .navigation {
+        height: 100%;
+        width: 200px;
+        background-color: #ffa8af;
+        display: flex;
+        flex-direction: column;
+    }
 
-        .menu_element {
-            padding: 30px;
-            font-family: 'Montserrat', sans-serif;
-            height: 100px;
-            font-size: 1.5em;
-            color: white;
-            align-items: center;
-            text-align: center;
-            align-content: center;
-            transition: color .6s;
-            transition: background-color .6s;
-        }
+    .menu_element {
+        padding: 30px;
+        font-family: 'Montserrat', sans-serif;
+        height: 100px;
+        font-size: 1.5em;
+        color: white;
+        align-items: center;
+        text-align: center;
+        align-content: center;
+        transition: color .6s;
+        transition: background-color .6s;
+    }
 
-        .menu_element:hover {
-            cursor: pointer;
-            color: #ffa8af;
-            background-color: white;
-        }
+    .menu_element:hover {
+        cursor: pointer;
+        color: #ffa8af;
+        background-color: white;
+    }
 
-        .content {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: row;
-        }
+    .content {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+    }
 
-        .cont {
-            height: 100%;
-            width: 100%;
-            margin: 20px;
-            border-radius: 20px;
-            order: 2;
-            background-color: white;
-        }
+    .cont {
+        height: 100%;
+        width: 100%;
+        margin: 20px;
+        border-radius: 20px;
+        order: 2;
+        background-color: white;
+    }
 
-        .votes_list {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            justify-content: flex-start;
-            align-items: flex-start;
-        }
+    .votes_list {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
 
-        .vote {
-            color: white;
-            width: auto;
-            height: auto;
-            margin: 20px;
-            padding: 10px;
-            border-radius: 13px;
-            background-color: #FDC2BE;
-            display: flex;
-            flex-direction: column;
-        }
+    .vote {
+        color: white;
+        width: auto;
+        height: auto;
+        margin: 20px;
+        padding: 10px;
+        border-radius: 13px;
+        background-color: #FDC2BE;
+        display: flex;
+        flex-direction: column;
+    }
 
-        .vote:hover {
-            cursor: pointer;
-        }
+    .vote:hover {
+        cursor: pointer;
+    }
 
-        .vote_item {
-            align-items: center;
-            display: flex;
-            margin: 5px;
-            flex-direction: row;
-        }
+    .vote_item {
+        align-items: center;
+        display: flex;
+        margin: 5px;
+        flex-direction: row;
+    }
 
-        .add {
-            height: 100%;
-            text-align: center;
-            font-size: 1.3em;
-        }
+    .add {
+        height: 100%;
+        text-align: center;
+        font-size: 1.3em;
+    }
 
-        .vote_header {
-            align-items: center;
-            display: flex;
-            margin: 5px;
-            flex-direction: row;
-            font-size: 1.5em;
-        }
+    .vote_header {
+        align-items: center;
+        display: flex;
+        margin: 5px;
+        flex-direction: row;
+        font-size: 1.5em;
+    }
 
-        .alert {
-            position: absolute;
-            width: 100%;
-            opacity: .9;
-        }
-        .history_name {
-            font-size: 1.3em;
-            padding: 10px;
-            margin: 20px;
-            border-radius: 13px 0 0 13px;
-            background-color: #FDC2BE;
-            width: 100%;
-            height: auto;
-            color: white;
-        }
-    </style>
+    .alert {
+        position: absolute;
+        width: 100%;
+        opacity: .9;
+    }
+    .history_name {
+        font-size: 1.3em;
+        padding: 10px;
+        margin: 20px;
+        border-radius: 13px 0 0 13px;
+        background-color: #FDC2BE;
+        width: 100%;
+        height: auto;
+        color: white;
+    }
+</style>
 
-    <title>Главная</title>
+<title>Главная</title>
 </head>
 <body scroll="no" style="overflow: hidden">
-<div class="body">
-    <div class="content">
-        <div class="navigation">
-            <div class="menu_logo">
-                <div class="cooltext">Vot!ng.org</div>
-            </div>
-            <a style="text-decoration:none" href="profile">
-                <div class="menu_element">Профиль</div>
-            </a>
-            <a style="text-decoration:none" href="complaints">
-                <div class="menu_element">Жалобы</div>
-            </a>
-            <a style="text-decoration:none" href="game">
-                <div class="menu_element">Жабы</div>
-            </a>
-            <a style="text-decoration:none" href="../logout">
-                <div class="menu_element">Выйти</div>
-            </a>
-        </div>
-        <div class="cont">
-            <div class="votes_list">
-                <a style="text-decoration:none" href="../new_vote">
-
-                <div class="vote add">Добавить</div>
-                    
-                    <a style="text-decoration:none" href="profile">
-                    <div class="vote history">История голосований                </div>
-</a>
+    <div class="body">
+        <div class="content">
+            <div class="navigation">
+                <div class="menu_logo">
+                    <div class="cooltext">Vot!ng.org</div>
+                </div>
+                <a style="text-decoration:none" href="profile">
+                    <div class="menu_element">Профиль</div>
                 </a>
-                {% for item in votes_history %}
+                <a style="text-decoration:none" href="complaints">
+                    <div class="menu_element">Жалобы</div>
+                </a>
+                <a style="text-decoration:none" href="game">
+                    <div class="menu_element">Жабы</div>
+                </a>
+                <a style="text-decoration:none" href="../logout">
+                    <div class="menu_element">Выйти</div>
+                </a>
+            </div>
+            <div class="cont">
+                <div class="votes_list">
+                    <a style="text-decoration:none" href="../new_vote">
+
+                        <div class="vote add">Добавить</div>
+                    </a>
+                    <a style="text-decoration:none" href="profile">
+                            <div class="vote history">История голосований                </div>
+                        </a><br/>
+                    {% for item in votes_history %}
 
                     <a style="text-decoration:none" href="../voting?id={{ item.0.id }}">
-                    <div class="vote">
-                        {% for i in item %}
+                        <div class="vote">
+                            {% for i in item %}
                             {% if i.id == None %}
-                                {% if i.maintitle != None %}
-                                    <div class="vote_header">
-                                        {{ i.maintitle }}
-                                    </div>
-                                {% else %}
-                                    <div class="vote_item">
-                                        {{ i.title }} {{ i.percentage }}%
-                                    </div>
-                                {% endif %}
+                            {% if i.maintitle != None %}
+                            <div class="vote_header">
+                                {{ i.maintitle }}
+                            </div>
+                            {% else %}
+                            <div class="vote_item">
+                                {{ i.title }} {{ i.percentage }}%
+                            </div>
                             {% endif %}
+                            {% endif %}
+                            {% endfor %}
+                        </div>
                         {% endfor %}
                     </div>
-                {% endfor %}
+                </div>
             </div>
         </div>
     </div>
-</div>
-</div>
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
-        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
-        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
-        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+    integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+    crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+    integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+    crossorigin="anonymous"></script>
 </body>
 </html>
