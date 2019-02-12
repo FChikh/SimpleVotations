@@ -11,6 +11,7 @@ from votation.forms import ProfileEditForm, Report
 from votation.forms import ProfileEditForm
 from datetime import datetime
 
+
 def main(request):  # main page
     data = dict()
     data = votingEngine.friendly_extract_for_everyone()
@@ -19,6 +20,7 @@ def main(request):  # main page
 
 @login_required
 def complain(request):  # complain page
+    context = dict()
     if request.method == "POST":
         form = Report(request.POST)
         print(form)
@@ -30,7 +32,6 @@ def complain(request):  # complain page
             u.save()
             messages.success(request, "Ваша жалоба успешно отправлена")
     if request.method in ["POST", "GET"]:
-        context = dict()
         context["history"] = models.ReportsHistory.objects.filter(author=request.user).values()
 
     return render(request, "complaints.html", context)
@@ -95,6 +96,7 @@ def profile(request):  # main func to form all the data for a profile cout
             return render(request, 'profile.html', data)
     return render(request, "profile.html", data)
 
+
 @login_required
 def voting(request):
     if request.POST:
@@ -107,16 +109,16 @@ def voting(request):
         votingid = (request.GET.get('id'))
         dbcoonnect = models.VotingsBase.objects.filter(id=votingid)
         dbcoonnect1 = models.VotingsBase.objects.get(id=votingid)
-        dblist=dbcoonnect.values_list()
-        counter=-1
-        t=models.VotingsBase.objects.get(id=votingid)
+        dblist = dbcoonnect.values_list()
+        counter = -1
+        t = models.VotingsBase.objects.get(id=votingid)
 
         ss = models.VotingHistory.objects.filter(golosid=votingid).filter(userid=int(current_user))
 
         if not ss.exists():
 
             try:
-                if dblist[0][4]==votingvar:
+                if dblist[0][4] == votingvar:
                     s = models.VotingHistory(golosid=int(votingid), userid=int(current_user))
                     s.save()
                     t.option1counter += 1
@@ -124,7 +126,7 @@ def voting(request):
             except:
                 pass
             try:
-                if dblist[0][6]==votingvar:
+                if dblist[0][6] == votingvar:
                     s = models.VotingHistory(golosid=int(votingid), userid=int(current_user))
                     s.save()
                     t.option2counter += 1
@@ -133,7 +135,7 @@ def voting(request):
                 pass
 
             try:
-                if dblist[0][8]==votingvar:
+                if dblist[0][8] == votingvar:
                     s = models.VotingHistory(golosid=int(votingid), userid=int(current_user))
                     s.save()
                     t.option3counter += 1
@@ -142,7 +144,7 @@ def voting(request):
                 pass
 
             try:
-                if dblist[0][10]==votingvar:
+                if dblist[0][10] == votingvar:
                     s = models.VotingHistory(golosid=int(votingid), userid=int(current_user))
                     s.save()
                     t.option4counter += 1
@@ -151,7 +153,6 @@ def voting(request):
                 pass
         else:
             messages.error(request, 'Вы уже голосовали')
-
 
     if request.method in ["GET", "POST"]:
         id = request.GET["id"]

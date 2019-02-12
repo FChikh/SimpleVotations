@@ -14,7 +14,7 @@ urlpatterns = [
     path("dbadd", votingEngine.testing),
     path('game/', views.game),
     path("new_vote/", views.new_vote),
-    path("new_metro/",views.metro),
+    path("new_metro/", views.metro),
     path("voting/", views.voting),
     path("logout/", views.logout_func)
 ]
