@@ -92,6 +92,8 @@ def calculate_the_percentage(d):  # making a list of % for each option
 
     return result
 
+# creating a query for html output on page
+
 
 def new_friendly_extract_for_profile(authorid):
     dataextr = {}
@@ -143,6 +145,8 @@ def new_friendly_extract_for_profile(authorid):
 
         dataextr['votes_history'].append(query)
     return dataextr
+
+# creating a query for html output
 
 
 def new_friendly_extract_for_everyone():
@@ -196,6 +200,8 @@ def new_friendly_extract_for_everyone():
         dataextr['votes_history'].append(query)
     return dataextr
 
+# old code
+
 
 def friendly_extract_for_everyone():  # extract all the user's history for views.py
     dataextr = {}
@@ -232,6 +238,9 @@ def friendly_extract_for_everyone():  # extract all the user's history for views
 
         dataextr['votes_history'].append(query)
     return dataextr
+
+
+# old code
 
 
 def friendly_extract_for_profile(authorid):  # extract all the user's history for views.py

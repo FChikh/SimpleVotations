@@ -98,7 +98,7 @@ def profile(request):  # main func to form all the data for a profile cout
 
 
 @login_required
-def voting(request):
+def voting(request): # voting action with several configurations 
     if request.POST:
         current_user = int(request.user.id)
         try:
