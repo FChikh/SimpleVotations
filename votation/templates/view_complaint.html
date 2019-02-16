@@ -188,10 +188,16 @@
             font-size: x-large;
         }
 
+        .main_text {
+            color: #ffa8af;
+            margin: 10px;
+            font-size: 1.5em
+        }
+
 
     </style>
 
-    <title>Жалобы</title>
+    <title>Жалоба</title>
 </head>
 <body scroll="no" style="overflow: hidden">
 <div class="body">
@@ -217,43 +223,23 @@
         </div>
 
         <div class="pre-scrollable cont">
-            <div class="header">Пожаловаться</div>
-            <form class="forma" method="POST">
-                {% csrf_token %}
-                <div class="form-group">
-                    <label for="InputName">Ваш логин</label>
-                    <input type="text" minlength="4" maxlength="150" name="username" class="form-control vvod"
-                           required id="InputName"
-                           aria-describedby="emailHelp" placeholder="Логин" value="{{ user.username }}" disabled>
-                </div>
-                <div class="form-group">
-                    <label for="report">Жалоба</label>
-                    <textarea minlength="30" maxlength="150" name="report" class="form-control vvod"
-                              required id="report"
-                              aria-describedby="emailHelp" placeholder="Чем вы недовольны?" value=""></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary voyti">Отправить</button>
-            </form>
-            <div class="votes_list">
-                {% for item in history %}
-                    <a style="text-decoration:none" href="../complaint?id={{ item.id }}">
-                    <div class="vote">
-                        <div class="vote_item">
-                            Текст: {{ item.text }}
-                        </div>
-                        <div class="vote_item">
-                            Статус: {{ item.status }}
-                        </div>
-                        {% if item.status == "Решена" %}
-                            <div class="vote_item">
-                                {{ item.answer }}
-                            </div>
-                        {% endif %}
-                    </div>
-                {% endfor %}
+            <div class="header">Жалоба № {{ report.id }}</div>
+            <div class="main_text">
+                Жалоба: {{ report.text }}
             </div>
+            <div class="main_text">
+                Статус: {{ report.status }}
+            </div>
+
+            {% if report.status == "Решена" %}
+                <div class="main_text">
+                    Ответ: {{ report.answer }}
+                </div>
+
+            {% endif %}
         </div>
     </div>
+</div>
 </div>
 
 {% for message in messages %}

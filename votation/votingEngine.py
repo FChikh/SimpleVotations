@@ -1,8 +1,8 @@
 # oopsie doopsie
-from datetime import datetime
-from votation import models
-from django.shortcuts import render
 import random
+from datetime import datetime
+
+from django.shortcuts import render
 
 from votation import models
 
@@ -92,6 +92,7 @@ def calculate_the_percentage(d):  # making a list of % for each option
 
     return result
 
+
 # creating a query for html output on page
 
 
@@ -146,6 +147,7 @@ def new_friendly_extract_for_profile(authorid):
         dataextr['votes_history'].append(query)
     return dataextr
 
+
 # creating a query for html output
 
 
@@ -199,6 +201,7 @@ def new_friendly_extract_for_everyone():
 
         dataextr['votes_history'].append(query)
     return dataextr
+
 
 # old code
 
@@ -322,7 +325,7 @@ def addvoting(request):  # func to add voting to db
     vars.append("")
     vars.append("")
     vars.append("")
-    ismulti=0
+    ismulti = 0
     # noone will crash server by leaving blank lines :D
     try:
         if votingfielddata['multiple'] == 1:

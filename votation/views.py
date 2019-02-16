@@ -1,15 +1,16 @@
+from random import randint
+
 from django.contrib import messages
 from django.contrib.auth import login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.shortcuts import render, redirect
-from random import randint
+
 from votation import models
 from votation import votingEngine
-from votation.forms import ProfileEditForm, Report
 from votation.forms import ProfileEditForm
-from datetime import datetime
+from votation.forms import Report
 
 
 def main(request):  # main page
@@ -34,10 +35,29 @@ def complain(request):  # complain page
     if request.method in ["POST", "GET"]:
         context["history"] = models.ReportsHistory.objects.filter(author=request.user).values()
         for item in context['history']:
-            item["text"] = item["text"][:20] + '...'
-
+            if len(item["text"]) > 20:
+                item["text"] = item["text"][:20] + '...'
+            if item["status"] == "Решена":
+                if len(item["answer"]) > 20:
+                    item["answer"] = item["answer"][:20] + '...'
 
     return render(request, "complaints.html", context)
+
+
+@login_required
+def view_complaint(request):
+    context = dict()
+    try:
+        id = request.GET["id"]
+        data = list(models.ReportsHistory.objects.filter(id=id).values())
+        if data[0]['author_id'] != request.user.id:
+            messages.error(request, "Доступ закрыт")
+            return redirect("/complaints")
+        context['report'] = data[0]
+        return render(request, "view_complaint.html", context)
+    except:
+        messages.error(request, "Такой жалобы не существует")
+        return redirect("/complaints")
 
 
 def metro(request):  # easter egg
