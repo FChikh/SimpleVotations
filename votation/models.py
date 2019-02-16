@@ -18,6 +18,7 @@ class VotingsBase(models.Model):
     option4 = models.CharField(max_length=50)
     option4counter = models.IntegerField()
     date = models.DateTimeField(null=True)
+    multi = models.IntegerField(default=0)  # 0 is false 1 is true
 
 class VotingHistory(models.Model):
     id = models.AutoField(primary_key=True)
