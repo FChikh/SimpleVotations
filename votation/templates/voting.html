@@ -182,6 +182,18 @@
             color: white;
         }
 
+        .header {
+            padding: 10px;
+            margin: 0px;
+            border-radius: 13px 13px 0px 0px;
+            background-color: #FDC2BE;
+            width: 100%;
+            height: auto;
+            color: white;
+            text-align: left;
+            font-size: larger;
+        }
+
     </style>
 
     <title>Голосование</title>
@@ -209,6 +221,7 @@
             </a>
         </div>
         <div class="cont">
+            <div class="header">Голосуй!</div>
             <form class="forma" method="POST">
                 {% csrf_token %}
                 <h2>{{ maintitle }}</h2>

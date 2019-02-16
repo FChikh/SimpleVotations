@@ -93,7 +93,7 @@
 
         .profil {
             height: 100%;
-            width: 50%;
+            width: 75%;
         }
 
         .pre-scrollable {
@@ -119,12 +119,14 @@
 
         .history_name {
             padding: 10px;
-            margin: 20px;
-            border-radius: 13px 0 0 13px;
+            margin: 0px;
+            border-radius: 0px 0px 0 0px;
             background-color: #FDC2BE;
             width: 100%;
             height: auto;
             color: white;
+            font-size: larger;
+            text-align: left;
         }
 
         .voyti {
@@ -200,11 +202,25 @@
             flex-direction: row;
             font-size: 1.5em;
         }
+
         .alert {
             position: absolute;
             width: 100%;
             opacity: .9;
         }
+
+        .header_profile {
+            padding: 10px;
+            margin: 0px;
+            border-radius: 13px 0px 0px 0px;
+            background-color: #FDC2BE;
+            width: 100%;
+            height: auto;
+            color: white;
+            text-align: left;
+            font-size: larger;
+        }
+
 
     </style>
 
@@ -234,9 +250,11 @@
         </div>
         <div class="pre-scrollable cont">
             <div class="profil">
+                <div class="header_profile">Профиль</div>
                 <div class="profile_image">
                     {% load staticfiles %}
-                    <img border-radius="20px" padding="0px" width="150px" height="150px" src="{% static 'votation/milos.gif' %}"></img>
+                    <img border-radius="20px" padding="0px" width="150px" height="150px"
+                         src="{% static 'votation/milos.gif' %}"></img>
                 </div>
                 <div class="info">
                     <h4>Логин: {{ name }}</h4>
@@ -247,12 +265,12 @@
                             <label for="InputName">Изменить логин</label>
                             <input type="text" minlength="4" maxlength="150" name="username" class="form-control vvod"
                                    required id="InputName"
-                                   aria-describedby="emailHelp" placeholder="Новый логин" value="{{name}}">
+                                   aria-describedby="emailHelp" placeholder="Новый логин" value="{{ name }}">
                         </div>
                         <div class="form-group">
                             <label for="InputEmail">Изменить электронную почту</label>
                             <input type="email" name="email" required class="form-control vvod" id="InputEmail"
-                                   aria-describedby="emailHelp" placeholder="Новая почта" value="{{surname}}">
+                                   aria-describedby="emailHelp" placeholder="Новая почта" value="{{ surname }}">
                         </div>
                         <div class="form-group">
                             <label for="InputPassword">Изменить пароль</label>
@@ -266,12 +284,13 @@
             </div>
             <div class="history">
                 <div class="history_name">
-                    История голосований
+                    Ваши голосования
                 </div>
                 <div class="votes_list">
                     {% for item in votes_history %}
 
-                        <a style="text-decoration:none" href="../voting?id={{ item.0.id }}"><div class="vote">
+                        <a style="text-decoration:none" href="../voting?id={{ item.0.id }}">
+                        <div class="vote">
                             {% for i in item %}
                                 {% if i.id == None %}
                                     {% if i.maintitle != None %}
