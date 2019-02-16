@@ -76,12 +76,16 @@
         }
 
         .cont {
-            height: 100%;
-            width: 100%;
+            height: 90%;
+            width: 90%;
             margin: 20px;
             border-radius: 20px;
             order: 2;
             background-color: white;
+            max-width: 100%;
+            max-height: 100%;
+            overflow-x: hidden;
+
         }
 
         .votes_list {
@@ -191,7 +195,7 @@
                 <div class="menu_element">Выйти</div>
             </a>
         </div>
-        <div class="cont">
+        <div class="pre-scrollable cont">
             <div class="header">Создать голосование</div>
             <form class="forma" method="POST">
                 {% csrf_token %}
@@ -202,25 +206,25 @@
                            id="InputTitle" aria-describedby="emailHelp" placeholder="Дайте ему имя"/>
                 </div>
                 <div class="form-group">
-                    <label for="Input1">Первый варик</label>
+                    <label for="Input1">Первый вариант</label>
                     <input required type="text" maxlength="50" name="var1"
                            class="form-control vvod"
                            id="Input1" placeholder="1 Вариант">
                 </div>
                 <div class="form-group">
-                    <label for="Input2">Второй варик</label>
+                    <label for="Input2">Второй вариант</label>
                     <input required type="text" maxlength="50" name="var2"
                            class="form-control vvod"
                            id="Input2" placeholder="2 Вариант">
                 </div>
                 <div class="form-group">
-                    <label for="Input3">Третий варик</label>
+                    <label for="Input3">Третий вариант</label>
                     <input type="text" maxlength="50" name="var3"
                            class="form-control vvod"
                            id="Input3" placeholder="3 Вариант">
                 </div>
                 <div class="form-group">
-                    <label for="Input4">Последний варик</label>
+                    <label for="Input4">Последний вариант</label>
                     <input type="text" maxlength="50" name="var4"
                            class="form-control vvod"
                            id="Input4" placeholder="4 Вариант">

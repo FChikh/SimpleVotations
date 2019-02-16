@@ -76,12 +76,13 @@
         }
 
         .cont {
-            height: 100%;
-            width: 100%;
+            height: 90%;
+            width: 90%;
             margin: 20px;
             border-radius: 20px;
             order: 2;
             background-color: white;
+            < < < < < < < HEAD
         }
 
         .header {
@@ -185,7 +186,6 @@
             <div class="header">История голосований</div>
             <div class="votes_list">
                 {% for item in votes_history %}
-
                     <a style="text-decoration:none" href="../voting?id={{ item.0.id }}">
                     <div class="vote">
                         {% for i in item %}
