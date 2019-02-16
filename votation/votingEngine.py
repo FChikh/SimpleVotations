@@ -324,8 +324,11 @@ def addvoting(request):  # func to add voting to db
     vars.append("")
     ismulti=0
     # noone will crash server by leaving blank lines :D
-    if votingfielddata['multiple'] == 1:
-        ismulti = 1
+    try:
+        if votingfielddata['multiple'] == 1:
+            ismulti = 1
+    except KeyError:
+        pass
 
     ne = models.VotingsBase(authorid=userids, question=votingfielddata['title'], options=numofvars,
                             option1=vars[0], option1counter=0,
