@@ -195,7 +195,7 @@
             height: auto;
             color: white;
             text-align: left;
-            font-size: larger;
+            font-size: x-large;
         }
 
     </style>
@@ -231,6 +231,17 @@
                 <h2>{{ maintitle }}</h2>
                 <br>
                 <fieldset class="form-group">
+                {% if multiple_choice == 1 %}
+                    {% for item in variants %}
+                        <div class="form-check">
+                            <input class="form-check form-check-inline" name="voteVariant" type="checkbox"
+                                   id="{{ item.0 }}"
+                                   value="{{ item.0 }}$" required>
+                            <label class="form-check-label" for="{{ item.0 }}">{{ item.0 }}: {{ item.1 }}</label>
+                        </div>
+                        <br>
+                    {% endfor %}
+                {% else %}
                     {% for item in variants %}
                         <div class="form-check">
                             <input class="form-check form-check-inline" name="voteVariant" type="radio"
@@ -240,6 +251,7 @@
                         </div>
                         <br>
                     {% endfor %}
+                {% endif %}
                 </fieldset>
                 <button type="submit" class="btn btn-primary voyti">Проголосовать</button>
             </form>

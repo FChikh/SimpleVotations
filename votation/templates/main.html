@@ -76,8 +76,8 @@
         }
 
         .cont {
-            height: 90%;
-            width: 90%;
+            height: 95%;
+            width: 95%;
             margin: 20px;
             border-radius: 13px;
             order: 2;
@@ -93,7 +93,7 @@
             height: auto;
             color: white;
             text-align: left;
-            font-size: larger;
+            font-size: x-large;
         }
 
         .votes_list {
@@ -184,6 +184,10 @@
         <div class="cont">
             <div class="header">История голосований</div>
             <div class="votes_list">
+                <a style="text-decoration:none" href="../new_vote">
+
+                    <div class="vote add">Добавить</div>
+                </a>
                 {% for item in votes_history %}
                     <a style="text-decoration:none" href="../voting?id={{ item.0.id }}">
                     <div class="vote">
@@ -202,10 +206,7 @@
                         {% endfor %}
                     </div>
                 {% endfor %}
-                <a style="text-decoration:none" href="../new_vote">
 
-                    <div class="vote add">Добавить</div>
-                </a>
             </div>
         </div>
     </div>
