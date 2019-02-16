@@ -98,89 +98,97 @@ def profile(request):  # main func to form all the data for a profile cout
 
 
 @login_required
-def voting(request): # voting action with several configurations 
+def voting(request):  # voting action with several configurations
     if request.POST:
         current_user = int(request.user.id)
         try:
-            votingvar = (request.POST['voteVariant'])
-            print(votingvar)
-        except:
-            return render(request, "voting.html")
+            votingvars = request.POST.getlist('voteVariant')
+            print(votingvars)
+            votingid = (request.GET.get('id'))
+            dbcoonnect = models.VotingsBase.objects.filter(id=votingid)
+            dbcoonnect1 = models.VotingsBase.objects.get(id=votingid)
+            dblist = dbcoonnect.values_list()
+            counter = -1
+            t = models.VotingsBase.objects.get(id=votingid)
 
-        votingid = (request.GET.get('id'))
-        dbcoonnect = models.VotingsBase.objects.filter(id=votingid)
-        dbcoonnect1 = models.VotingsBase.objects.get(id=votingid)
-        dblist = dbcoonnect.values_list()
-        counter = -1
-        t = models.VotingsBase.objects.get(id=votingid)
+            ss = models.VotingHistory.objects.filter(golosid=votingid).filter(userid=int(current_user))
 
-        ss = models.VotingHistory.objects.filter(golosid=votingid).filter(userid=int(current_user))
-
-        votingvars = votingvar.split('$')
-        for votingvar in votingvars:
             if not ss.exists():
 
                 try:
-                    if dblist[0][4] == votingvar:
-                        s = models.VotingHistory(golosid=int(votingid), userid=int(current_user))
-                        s.save()
-                        t.option1counter += 1
-                        t.save()
+                    for votingvar in votingvars:
+                        if dblist[0][4] == votingvar:
+                            s = models.VotingHistory(golosid=int(votingid), userid=int(current_user))
+                            s.save()
+                            t.option1counter += 1
+                            t.save()
                 except:
                     pass
                 try:
-                    if dblist[0][6] == votingvar:
-                        s = models.VotingHistory(golosid=int(votingid), userid=int(current_user))
-                        s.save()
-                        t.option2counter += 1
-                        t.save()
-                except:
-                    pass
-
-                try:
-                    if dblist[0][8] == votingvar:
-                        s = models.VotingHistory(golosid=int(votingid), userid=int(current_user))
-                        s.save()
-                        t.option3counter += 1
-                        t.save()
+                    for votingvar in votingvars:
+                        if dblist[0][6] == votingvar:
+                            s = models.VotingHistory(golosid=int(votingid), userid=int(current_user))
+                            s.save()
+                            t.option2counter += 1
+                            t.save()
                 except:
                     pass
 
                 try:
-                    if dblist[0][10] == votingvar:
-                        s = models.VotingHistory(golosid=int(votingid), userid=int(current_user))
-                        s.save()
-                        t.option4counter += 1
-                        t.save()
+                    for votingvar in votingvars:
+                        if dblist[0][8] == votingvar:
+                            s = models.VotingHistory(golosid=int(votingid), userid=int(current_user))
+                            s.save()
+                            t.option3counter += 1
+                            t.save()
+                except:
+                    pass
+
+                try:
+                    for votingvar in votingvars:
+                        if dblist[0][10] == votingvar:
+                            s = models.VotingHistory(golosid=int(votingid), userid=int(current_user))
+                            s.save()
+                            t.option4counter += 1
+                            t.save()
                 except:
                     pass
             else:
                 messages.error(request, 'Вы уже голосовали')
+        except:
+            pass
+
 
     if request.method in ["GET", "POST"]:
-        id = request.GET["id"]
-        dat = models.VotingsBase.objects.filter(id=id).values_list()
-        fff=(dat[0])
-        dat = dat[0]
-        res = {}
-        vars = []
-        res['id'] = dat[0]
-        res['authorid'] = dat[1]
-        res['maintitle'] = dat[2]
-        res['cnt'] = 0
+        try:
+            id = request.GET["id"]
+            dat = models.VotingsBase.objects.filter(id=id).values_list()
+            fff = (dat[0])
+            dat = dat[0]
+            res = {}
+            vars = []
+            res['id'] = dat[0]
+            res['authorid'] = dat[1]
+            res['maintitle'] = dat[2]
+            res['cnt'] = 0
 
-        for i in range(4, 4 + dat[3] * 2, 2):
-            vars.append([dat[i], dat[i + 1]])
-            res['cnt'] += int(dat[i + 1])
-        res['variants'] = vars
-        for i in vars:
-            if res['cnt'] != 0:
-                i.append(round(int(i[1]) / res['cnt'] * 100))
-            else:
-                i.append(0)
-        res['multiple'] = 1
-        return render(request, "voting.html", res)
-    return render(request, "voting.html")
+            for i in range(4, 4 + dat[3] * 2, 2):
+                vars.append([dat[i], dat[i + 1]])
+                res['cnt'] += int(dat[i + 1])
+            res['variants'] = vars
+            for i in vars:
+                if res['cnt'] != 0:
+                    i.append(round(int(i[1]) / res['cnt'] * 100))
+                else:
+                    i.append(0)
+            res['multiple'] = 1
+            return render(request, "voting.html", res)
+        except:
+            messages.error(request, 'Такого голосования не существует')
+            return redirect(to='/')
+
+
+
 
 
 def logout_func(request):
