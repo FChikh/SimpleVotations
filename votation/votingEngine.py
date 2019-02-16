@@ -323,14 +323,16 @@ def addvoting(request):  # func to add voting to db
     vars.append("")
     vars.append("")
     vars.append("")
-
+    ismulti=0
     # noone will crash server by leaving blank lines :D
+    if votingfielddata['multiple'] == 1:
+        ismulti = 1
 
     ne = models.VotingsBase(authorid=userids, question=votingfielddata['title'], options=numofvars,
                             option1=vars[0], option1counter=0,
                             option2=vars[1], option2counter=0,
                             option3=vars[2], option3counter=0,
-                            option4=vars[3], option4counter=0, date=datetime.now())
+                            option4=vars[3], option4counter=0, date=datetime.now(), multi=ismulti)
     ne.save()
 
     return render(request, 'profile.html')
