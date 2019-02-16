@@ -103,6 +103,7 @@ def voting(request): # voting action with several configurations
         current_user = int(request.user.id)
         try:
             votingvar = (request.POST['voteVariant'])
+            print(votingvar)
         except:
             return render(request, "voting.html")
 
@@ -153,8 +154,8 @@ def voting(request): # voting action with several configurations
                         t.save()
                 except:
                     pass
-        else:
-            messages.error(request, 'Вы уже голосовали')
+            else:
+                messages.error(request, 'Вы уже голосовали')
 
     if request.method in ["GET", "POST"]:
         id = request.GET["id"]
@@ -178,7 +179,6 @@ def voting(request): # voting action with several configurations
             else:
                 i.append(0)
         res['multiple'] = 1
-        print(res)
         return render(request, "voting.html", res)
     return render(request, "voting.html")
 

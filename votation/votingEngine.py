@@ -251,7 +251,6 @@ def friendly_extract_for_profile(authorid):  # extract all the user's history fo
     query = []
     # creating a dict of history
     for object in dat:
-        print(object)
         if object[3] == 4:
             perc = (calculate_the_percentage([object[5], object[7], object[9], object[11]]))
             query = [
