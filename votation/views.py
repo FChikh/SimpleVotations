@@ -33,6 +33,9 @@ def complain(request):  # complain page
             messages.success(request, "Ваша жалоба успешно отправлена")
     if request.method in ["POST", "GET"]:
         context["history"] = models.ReportsHistory.objects.filter(author=request.user).values()
+        for item in context['history']:
+            item["text"] = item["text"][:20] + '...'
+
 
     return render(request, "complaints.html", context)
 
@@ -158,7 +161,6 @@ def voting(request):  # voting action with several configurations
         except:
             pass
 
-
     if request.method in ["GET", "POST"]:
         try:
             id = request.GET["id"]
@@ -186,9 +188,6 @@ def voting(request):  # voting action with several configurations
         except:
             messages.error(request, 'Такого голосования не существует')
             return redirect(to='/')
-
-
-
 
 
 def logout_func(request):
