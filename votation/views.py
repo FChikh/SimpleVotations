@@ -115,6 +115,7 @@ def voting(request): # voting action with several configurations
 
         ss = models.VotingHistory.objects.filter(golosid=votingid).filter(userid=int(current_user))
 
+        print(votingvar)
         if not ss.exists():
 
             try:
