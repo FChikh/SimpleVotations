@@ -38,7 +38,7 @@ def login_page(request):
 
 
 def signup_page(request):
-    next_page = request.GET.get('next', '/login')
+    next_page = request.GET.get('next', '')
     context = dict()
     context['title'] = 'Регистрация'
 
