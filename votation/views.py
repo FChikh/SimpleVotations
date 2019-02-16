@@ -157,7 +157,7 @@ def voting(request): # voting action with several configurations
     if request.method in ["GET", "POST"]:
         id = request.GET["id"]
         dat = models.VotingsBase.objects.filter(id=id).values_list()
-
+        fff=(dat[0])
         dat = dat[0]
         res = {}
         vars = []
@@ -175,6 +175,8 @@ def voting(request): # voting action with several configurations
                 i.append(round(int(i[1]) / res['cnt'] * 100))
             else:
                 i.append(0)
+        res['multiple'] = 1
+        print(res)
         return render(request, "voting.html", res)
     return render(request, "voting.html")
 
