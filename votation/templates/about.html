@@ -34,6 +34,12 @@
             cursor: pointer;
         }
 
+        .main_text {
+            color: #ffa8af;
+            margin: 10px;
+            font-size: 1.3em
+        }
+
         .cooltext {
             width: 100%;
             height: 100%;
@@ -244,15 +250,22 @@
             <a style="text-decoration:none" href="../game">
                 <div class="menu_element">Жабы</div>
             </a>
+            <a style="text-decoration:none" href="../about">
+                <div class="menu_element">О сайте</div>
+            </a>
             <a style="text-decoration:none" href="../logout">
                 <div class="menu_element">Выйти</div>
             </a>
         </div>
         <div class="pre-scrollable cont">
-            <h1>ABOUT</h1>
+            <div class="main_text">
+
+            </div>
         </div>
     </div>
 </div>
+
+
 
 {% for message in messages %}
     <div class="alert alert-light" role="alert">
