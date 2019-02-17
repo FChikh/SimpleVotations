@@ -202,7 +202,7 @@
 
     <title>Голосование</title>
 </head>
-<body scroll="no" style="overflow: hidden">
+<body  style="overflow: hidden">
 <div class="body">
     <div class="content">
         <div class="navigation">
@@ -231,7 +231,7 @@
                 <h2>{{ maintitle }}</h2>
                 <br>
                 <fieldset class="form-group">
-                {% if multiple == 1 %}
+                {% if multi == 1 %}
                     {% for item in variants %}
                         <div class="form-check">
                             <input class="form-check form-check-inline" name="voteVariant" type="checkbox"
