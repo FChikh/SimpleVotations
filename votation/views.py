@@ -215,4 +215,4 @@ def logout_func(request):
     return redirect('/login/?next=/profile/')
 
 def about(request):
-    return
+    return render(request, "about.html")

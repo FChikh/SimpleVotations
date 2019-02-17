@@ -18,7 +18,7 @@ urlpatterns = [
     path("voting/", views.voting),
     path("logout/", views.logout_func),
     path("complaint/",  views.view_complaint),
-    path("about/", views.about())
+    path("about/", views.about)
 ]
 
 urlpatterns += staticfiles_urlpatterns()
