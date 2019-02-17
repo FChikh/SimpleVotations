@@ -213,3 +213,6 @@ def voting(request):  # voting action with several configurations
 def logout_func(request):
     logout(request)
     return redirect('/login/?next=/profile/')
+
+def about(request):
+    return
